@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import Header from "@/components/header"
 import HeroSection from "@/components/sections/hero-section"
 import CommunitySection from "@/components/sections/community-section"
@@ -24,7 +25,9 @@ export default function Home() {
       <TrainersSection />
       <SafetySection />
       <FAQSection />
-      <ContactSection />
+      <Suspense fallback={<div className="min-h-[600px] w-full" />}>
+        <ContactSection />
+      </Suspense>
       <Footer />
     </main>
   )
