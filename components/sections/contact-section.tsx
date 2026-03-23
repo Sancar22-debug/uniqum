@@ -5,8 +5,9 @@ import { useLanguage } from "@/components/language-provider"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { ArrowRight, Check, Phone, MapPin, Instagram, MessageCircle } from "lucide-react"
+import { ArrowRight, Check, Phone, MapPin, Instagram, MessageCircle, Loader2 } from "lucide-react"
 import { WHATSAPP_DISPLAY_PHONE, WHATSAPP_URL, openWhatsApp } from "@/lib/contacts"
+import { useUTM } from "@/hooks/use-utm"
 
 const sectionText = {
   ru: {
@@ -43,15 +44,39 @@ const sectionText = {
 
 export default function ContactSection() {
   const ref = useScrollReveal()
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const { lang } = useLanguage()
   const t = sectionText[lang]
+  const utmTags = useUTM()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    openWhatsApp()
+    if (isSubmitting) return
+
+    setIsSubmitting(true)
+    const formData = new FormData(e.currentTarget)
+    
+    const payload = {
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      age: formData.get("age"),
+      utmTags
+    }
+
+    try {
+      await fetch("/api/amocrm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+    } catch (error) {
+      console.error("Failed to submit to AmoCRM", error)
+    }
+
+    setIsSubmitting(false)
     setIsSubmitted(true)
-    setTimeout(() => setIsSubmitted(false), 4000)
+    setTimeout(() => setIsSubmitted(false), 5000)
   }
 
   return (
@@ -84,27 +109,31 @@ export default function ContactSection() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <Input
+                  name="name"
                   placeholder={t.namePlaceholder}
                   className="h-14 rounded-xl border-2 border-gray-200 focus:border-[#0A2463] px-4 text-base"
                   required
                 />
                 <Input
+                  name="phone"
                   type="tel"
                   placeholder={t.phonePlaceholder}
                   className="h-14 rounded-xl border-2 border-gray-200 focus:border-[#0A2463] px-4 text-base"
                   required
                 />
                 <Input
+                  name="age"
                   placeholder={t.agePlaceholder}
                   className="h-14 rounded-xl border-2 border-gray-200 focus:border-[#0A2463] px-4 text-base"
                 />
                 <Button
                   type="submit"
+                  disabled={isSubmitting}
                   size="lg"
                   className="w-full bg-[#0A2463] text-white hover:bg-[#0A2463]/90 font-black rounded-xl h-14 text-base group shadow-lg"
                 >
-                  {t.submit}
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  {isSubmitting ? <Loader2 className="h-5 w-5 animate-spin" /> : t.submit}
+                  {!isSubmitting && <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />}
                 </Button>
               </form>
             )}
