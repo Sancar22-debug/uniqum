@@ -43,17 +43,17 @@ export default function SafetySection() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-white">
-            <span className="reveal-item inline-block bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm font-bold mb-6">
+            <span className="inline-block bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm font-bold mb-6">
               {t.badge}
             </span>
-            <h2 className="reveal-item text-3xl md:text-4xl lg:text-5xl font-black mb-8 text-balance">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-8 text-balance">
               {t.titleStart} <span className="text-white">{t.titleHighlight}</span>
             </h2>
             <div className="space-y-3">
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="reveal-item flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-colors"
+                  className="flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-colors"
                 >
                   <div className="w-11 h-11 rounded-xl bg-white border border-white/40 flex items-center justify-center flex-shrink-0">
                     <feature.icon className="w-5 h-5 text-[#0A2463]" />
@@ -64,7 +64,7 @@ export default function SafetySection() {
             </div>
           </div>
 
-          <div className="reveal-item relative w-full mt-10 lg:mt-0">
+          <div className="relative w-full mt-10 lg:mt-0">
             <div className="grid grid-cols-2 gap-3 lg:gap-4">
               <div className="space-y-3 lg:space-y-4 pt-6 lg:pt-10 relative z-10">
                 <div className="relative h-[160px] sm:h-[220px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20">

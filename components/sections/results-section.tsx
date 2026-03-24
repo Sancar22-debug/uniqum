@@ -78,7 +78,7 @@ export default function ResultsSection() {
   const t = sectionText[lang]
 
   return (
-    <section id="results" ref={ref} className="relative py-20 md:py-24 overflow-hidden">
+    <section id="results" ref={ref} className="relative py-20 md:py-24 overflow-x-clip">
       <div className="absolute inset-0 bg-[#0A2463]" />
       <div
         className="absolute top-0 left-0 w-full h-24 bg-white pointer-events-none"
@@ -101,7 +101,9 @@ export default function ResultsSection() {
             </p>
           </div>
           <div className="absolute right-0 lg:right-4 top-1/2 -translate-y-1/2 w-48 h-48 md:w-80 md:h-80 lg:w-[28rem] lg:h-[28rem] z-0 pointer-events-none hidden sm:block">
-             <Image src="/images/Cartoonypics/acrobatic.png" alt="Acrobatic Child" fill sizes="448px" className="object-contain" />
+             <Image src="/images/Cartoonypics/acrobatic.png" alt="Acrobatic Child" fill sizes="448px" className="object-contain relative z-10" />
+             <Image src="/images/icons/redstar.png" alt="stars" width={64} height={64} className="absolute -top-4 -right-2 rotate-12 z-0 pointer-events-none" unoptimized />
+             <Image src="/images/icons/lighting red full.png" alt="lightning" width={56} height={56} className="absolute bottom-8 -left-4 -rotate-12 z-0 pointer-events-none" unoptimized />
           </div>
         </div>
 
@@ -109,7 +111,7 @@ export default function ResultsSection() {
           {results.map((result, index) => (
             <div
               key={index}
-              className="reveal-item group bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/15 hover:bg-white/20 transition-all"
+              className="group bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/15 hover:bg-white/20 transition-all"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg">
@@ -124,7 +126,7 @@ export default function ResultsSection() {
           ))}
         </div>
 
-        <div className="reveal-item text-center mt-10 md:mt-12 px-1">
+        <div className="text-center mt-10 md:mt-12 px-1">
           <Button
             size="lg"
             className="w-full sm:w-auto bg-white text-[#0A2463] hover:bg-gray-100 font-black rounded-full px-6 sm:px-8 py-4 sm:py-6 h-auto whitespace-normal text-center leading-tight text-sm sm:text-base group shadow-xl"

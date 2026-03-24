@@ -23,8 +23,9 @@ const heroText = {
     galleryTitle: "Яркая спортивная среда",
     gallery: [
       { src: "/images/dsc_7373.jpg", label: "Тхэквондо" },
-      { src: "/images/img_9514.jpg", label: "Спортивный зал" },
-      { src: "/images/sem03898.jpg", label: "Тренировки детей" },
+      { src: "/images/Gym Pictures/SEM01922.JPG", label: "Гимнастика" },
+      { src: "/images/Gym Pictures/SEM02155.JPG", label: "Тренировки" },
+      { src: "/images/Gym Pictures/SEM02350.JPG", label: "Занятия детей" },
     ],
   },
   ky: {
@@ -42,8 +43,9 @@ const heroText = {
     galleryTitle: "Жаркын спорт чөйрөсү",
     gallery: [
       { src: "/images/dsc_7373.jpg", label: "Тхэквондо" },
-      { src: "/images/img_9514.jpg", label: "Спорт залы" },
-      { src: "/images/sem03898.jpg", label: "Балдар машыгуусу" },
+      { src: "/images/Gym Pictures/SEM01922.JPG", label: "Гимнастика" },
+      { src: "/images/Gym Pictures/SEM02155.JPG", label: "Машыгуулар" },
+      { src: "/images/Gym Pictures/SEM02350.JPG", label: "Балдар сабагы" },
     ],
   },
 } as const
@@ -64,8 +66,7 @@ export default function HeroSection() {
       style={{ background: "linear-gradient(135deg, #0A2463 0%, #133a93 48%, #0A2463 100%)" }}
       aria-label={t.ariaLabel}
     >
-      <div
-        className="absolute inset-y-0 right-0 w-[58%] bg-[#ED3D4E]/90"
+      <div className="absolute inset-y-0 right-0 w-[58%] bg-[#ED3D4E]/90"
         style={{ clipPath: "polygon(22% 0, 100% 0, 100% 100%, 0% 100%)" }}
       />
       <div className="absolute top-24 -left-16 w-80 h-80 bg-white/12 rounded-full blur-3xl pointer-events-none" />
@@ -114,7 +115,10 @@ export default function HeroSection() {
                 size="lg"
                 variant="outline"
                 className="w-full sm:w-auto border-2 border-white/35 text-white bg-white/10 hover:bg-white/20 rounded-full px-6 sm:px-8 py-4 h-auto text-sm sm:text-base backdrop-blur-sm"
-                onClick={openWhatsApp}
+                onClick={() => {
+                  const element = document.getElementById("directions")
+                  element?.scrollIntoView({ behavior: "smooth" })
+                }}
               >
                 {t.secondaryCta}
               </Button>
@@ -126,34 +130,21 @@ export default function HeroSection() {
             style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(26px)" }}
           >
             <p className="text-white/90 text-xs md:text-sm font-bold tracking-wider uppercase mb-2 md:mb-3 text-left">{t.galleryTitle}</p>
-            <div className="grid gap-3 md:gap-4 md:grid-cols-3">
-              <div className="md:col-span-2 relative h-56 md:h-80 rounded-2xl overflow-hidden border border-white/30 shadow-2xl">
-                <Image
-                  src={t.gallery[0].src}
-                  alt={t.gallery[0].label}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 66vw"
-                  className="object-cover"
-                  unoptimized
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A2463]/70 via-[#0A2463]/20 to-transparent" />
-              </div>
-
-              <div className="grid grid-rows-2 gap-3 md:gap-4">
-                {t.gallery.slice(1).map((item) => (
-                  <div key={item.label} className="relative h-28 md:h-[9.5rem] rounded-2xl overflow-hidden border border-white/30 shadow-xl">
-                    <Image
-                      src={item.src}
-                      alt={item.label}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover"
-                      unoptimized
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A2463]/70 via-[#0A2463]/15 to-transparent" />
-                  </div>
-                ))}
-              </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+              {t.gallery.map((item, index) => (
+                <div key={item.label} className="relative aspect-square rounded-2xl overflow-hidden border border-white/30 shadow-xl bg-[#0A2463]">
+                  <Image
+                    src={item.src}
+                    alt={item.label}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className={`object-cover ${index === 1 ? "object-bottom" : "object-center"}`}
+                    style={index === 3 ? { objectPosition: "center 60%" } : undefined}
+                    unoptimized
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A2463]/40 via-transparent to-transparent" />
+                </div>
+              ))}
             </div>
           </div>
 
@@ -166,11 +157,11 @@ export default function HeroSection() {
               <div className="text-xs md:text-sm font-semibold text-[#0A2463]/70 mt-0.5">{t.students}</div>
             </div>
             <div className="rounded-2xl bg-white/90 text-[#0A2463] py-2.5 md:py-2.5 text-center shadow-lg">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-black">3+</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-black">4+</div>
               <div className="text-xs md:text-sm font-semibold text-[#0A2463]/70 mt-0.5">{t.years}</div>
             </div>
             <div className="rounded-2xl bg-white/90 text-[#0A2463] py-2.5 md:py-2.5 text-center shadow-lg">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-black">15+</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-black">20+</div>
               <div className="text-xs md:text-sm font-semibold text-[#0A2463]/70 mt-0.5">{t.coaches}</div>
             </div>
           </div>

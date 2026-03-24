@@ -24,7 +24,7 @@ const directions = [
       ky: ["Дени сак бел жана таман", "Келбетти оңдоо", "Жамбаш, вальгус жана жалпак таманды оңдоо"],
     },
     textDark: false,
-    silhouette: "/images/silhouette-gymnast.avif",
+    silhouette: "/images/silhouette-gymnastics.png",
     silhouetteClass: "right-0 bottom-0 w-32 h-32",
     silhouetteMobileClass: "right-2 bottom-2 w-40 h-40",
   },
@@ -81,7 +81,7 @@ const directions = [
       ky: ["Оюн форматы", "Моториканы өнүктүрүү", "Спортко даярдоо"],
     },
     textDark: true,
-    silhouette: "/images/silhouette-gymnastics.png",
+    silhouette: "/images/silhouette-gymnast.avif",
     silhouetteClass: "right-0 bottom-0 w-32 h-32",
     silhouetteMobileClass: "right-2 bottom-2 w-40 h-40",
   },
@@ -138,11 +138,13 @@ export default function DirectionsSection() {
   const current = directions[activeIndex]
 
   return (
-    <section id="directions" ref={ref} className="py-20 md:py-24 bg-white relative overflow-hidden">
+    <section id="directions" ref={ref} className="py-20 md:py-24 bg-white relative overflow-x-clip">
       <div className="container mx-auto px-4">
         <div className="relative flex items-center justify-center mb-16 md:mb-20 min-h-[250px]">
           <div className="absolute left-0 lg:left-2 top-1/2 -translate-y-1/2 w-40 h-40 md:w-60 md:h-60 lg:w-72 lg:h-72 z-0 pointer-events-none hidden sm:block">
-             <Image src="/images/Cartoonypics/judo.png" alt="Judo Kids" fill sizes="288px" className="object-contain opacity-95" />
+             <Image src="/images/Cartoonypics/judo.png" alt="Judo Kids" fill sizes="288px" className="object-contain opacity-95 relative z-10" />
+             <Image src="/images/icons/lighting red full.png" alt="lightning" width={50} height={50} className="absolute -top-4 left-10 rotate-[-10deg] z-0 pointer-events-none" unoptimized />
+             <Image src="/images/icons/blue lighting full.png" alt="lightning" width={50} height={50} className="absolute bottom-6 -right-6 rotate-[15deg] z-0 pointer-events-none" unoptimized />
           </div>
           <div className="text-center relative z-10 max-w-3xl lg:max-w-4xl mx-auto px-4">
             <span className="inline-block bg-[#0A2463]/10 text-[#0A2463] px-4 py-1.5 rounded-full text-sm font-bold mb-5 shadow-sm">
@@ -165,7 +167,7 @@ export default function DirectionsSection() {
                 setActiveIndex(index)
                 setIsAutoPlaying(false)
               }}
-              className={`reveal-item relative overflow-hidden rounded-3xl p-6 text-left cursor-pointer transition-all duration-300 border border-[#0A2463]/15 bg-white ${
+              className={`relative overflow-hidden rounded-3xl p-6 text-left cursor-pointer transition-all duration-300 border border-[#0A2463]/15 bg-white ${
                 activeIndex === index ? "ring-2 ring-[#0A2463] -translate-y-0.5 shadow-xl" : "hover:-translate-y-0.5 hover:shadow-md"
               }`}
             >
@@ -192,7 +194,7 @@ export default function DirectionsSection() {
         </div>
 
         <div className="md:hidden mb-8">
-          <div className="reveal-item relative overflow-hidden rounded-3xl p-8 min-h-[360px] border border-[#0A2463]/15 bg-white shadow-sm">
+          <div className="relative overflow-hidden rounded-3xl p-8 min-h-[360px] border border-[#0A2463]/15 bg-white shadow-sm">
             <div
               className={`pointer-events-none absolute bg-contain bg-no-repeat opacity-[0.15] ${current.silhouetteMobileClass}`}
               style={{ backgroundImage: `url('${current.silhouette}')`, filter: "contrast(1.15)" }}
@@ -247,7 +249,7 @@ export default function DirectionsSection() {
           </div>
         </div>
 
-        <div className="reveal-item text-center mt-4 px-1">
+        <div className="text-center mt-4 px-1">
           <Button
             size="lg"
             className="w-full sm:w-auto bg-[#0A2463] text-white hover:bg-[#0A2463]/90 font-black rounded-full px-6 sm:px-8 py-4 sm:py-6 h-auto whitespace-normal text-center leading-tight text-sm sm:text-base group shadow-lg"

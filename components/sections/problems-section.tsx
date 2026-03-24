@@ -72,11 +72,13 @@ export default function ProblemsSection() {
   const t = sectionText[lang]
 
   return (
-    <section ref={ref} className="relative -mt-px py-24 bg-white overflow-hidden">
+    <section ref={ref} className="relative -mt-px py-24 bg-white overflow-x-clip">
       <div className="container mx-auto px-4 relative z-10">
         <div className="relative flex items-center justify-center mb-16 md:mb-20 min-h-[250px]">
           <div className="absolute left-0 lg:left-4 top-1/2 -translate-y-1/2 w-48 h-48 md:w-80 md:h-80 lg:w-[28rem] lg:h-[28rem] z-0 pointer-events-none hidden sm:block">
-             <Image src="/images/Cartoonypics/confident.png" alt="Confident Boy" fill sizes="448px" className="object-contain" />
+             <Image src="/images/Cartoonypics/confident.png" alt="Confident Boy" fill sizes="448px" className="object-contain relative z-10" />
+             <Image src="/images/icons/lightingred.png" alt="lightning" width={60} height={60} className="absolute -top-6 right-10 rotate-[15deg] z-0 pointer-events-none" unoptimized />
+             <Image src="/images/icons/redstar.png" alt="stars" width={50} height={50} className="absolute bottom-4 -left-2 -rotate-12 z-0 pointer-events-none" unoptimized />
           </div>
           <div className="text-center relative z-10 max-w-3xl lg:max-w-4xl mx-auto px-4">
             <span className="inline-block bg-[#ED3D4E]/10 text-[#ED3D4E] px-4 py-1.5 rounded-full text-sm font-bold mb-5 shadow-sm">

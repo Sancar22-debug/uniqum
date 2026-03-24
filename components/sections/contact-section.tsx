@@ -85,13 +85,14 @@ export default function ContactSection() {
       ref={ref}
       className="relative py-24 overflow-hidden"
       style={{ background: "linear-gradient(135deg, #0A2463 0%, #1a3a8a 100%)" }}
+      suppressHydrationWarning
     >
-      <div className="absolute top-16 right-16 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-16 left-16 w-80 h-80 bg-[#ED3D4E]/8 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-16 right-16 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" suppressHydrationWarning />
+      <div className="absolute bottom-16 left-16 w-80 h-80 bg-[#ED3D4E]/8 rounded-full blur-3xl pointer-events-none" suppressHydrationWarning />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          <div className="reveal-item bg-white rounded-3xl p-8 md:p-10 shadow-2xl">
+          <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl">
             <span className="inline-block bg-white text-[#0A2463] border border-gray-200 px-4 py-1.5 rounded-full text-sm font-bold mb-5">
               {t.badge}
             </span>
@@ -140,7 +141,7 @@ export default function ContactSection() {
           </div>
 
           <div className="text-white space-y-8">
-            <div className="reveal-item">
+            <div>
               <h3 className="text-3xl md:text-4xl font-black mb-2">
                 <span className="text-white">UNIQUM</span> SPORT
               </h3>
@@ -152,7 +153,7 @@ export default function ContactSection() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="reveal-item flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-colors group"
+                className="flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-colors group"
               >
                 <div className="w-12 h-12 rounded-xl bg-white border border-white/35 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                   <Phone className="w-5 h-5 text-[#0A2463]" />
@@ -163,7 +164,7 @@ export default function ContactSection() {
                 </div>
               </a>
 
-              <div className="reveal-item flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-4">
+              <div className="flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-4">
                 <div className="w-12 h-12 rounded-xl bg-[#0099FF] flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-5 h-5 text-white" />
                 </div>
@@ -174,7 +175,7 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <div className="reveal-item flex gap-3">
+            <div className="flex gap-3">
               <a
                 href="https://www.instagram.com/uniqum.sport?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                 target="_blank"

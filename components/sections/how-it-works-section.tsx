@@ -5,6 +5,7 @@ import { useLanguage } from "@/components/language-provider"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Search, PlayCircle, MessageSquare, TrendingUp, RefreshCw } from "lucide-react"
 import { openWhatsApp } from "@/lib/contacts"
+import Image from "next/image"
 
 const steps = [
   {
@@ -74,23 +75,30 @@ export default function HowItWorksSection() {
   const t = sectionText[lang]
 
   return (
-    <section id="how-it-works" ref={ref} className="py-24 bg-gray-50 relative overflow-hidden">
+    <section id="how-it-works" ref={ref} className="py-26 bg-gray-50 relative overflow-x-clip">
       <div className="absolute top-0 right-0 w-80 h-80 bg-[#0099FF]/6 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#ED3D4E]/6 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="reveal-item inline-block bg-[#0099FF]/10 text-[#0099FF] px-4 py-1.5 rounded-full text-sm font-bold mb-6">
-            {t.badge}
-          </span>
-          <h2 className="reveal-item text-3xl md:text-4xl lg:text-5xl font-black text-[#0A2463] mb-6 text-balance">
-            {t.titleStart} <span className="text-[#ED3D4E]">{t.titleHighlight}</span>
-          </h2>
+        <div className="flex flex-col items-center justify-center mb-16 md:mb-20 relative z-20">
+          <div className="w-64 h-64 md:w-80 md:h-80 lg:w-[24rem] lg:h-[24rem] relative -mt-32 lg:-mt-44 -mb-8 lg:-mb-12 pointer-events-none hidden sm:block drop-shadow-xl">
+            <Image src="/images/Cartoonypics/gymnast.png" alt="Gymnast" fill sizes="384px" className="object-contain relative z-20" />
+            <Image src="/images/icons/blue lighting full.png" alt="lightning" width={56} height={56} className="absolute top-[40%] -right-8 rotate-12 z-10 pointer-events-none" unoptimized />
+            <Image src="/images/icons/redstar.png" alt="stars" width={64} height={64} className="absolute top-[20%] -left-6 -rotate-[15deg] z-10 pointer-events-none" unoptimized />
+          </div>
+          <div className="text-center max-w-3xl lg:max-w-4xl mx-auto px-4 relative z-10">
+            <span className="inline-block bg-[#0099FF]/10 text-[#0099FF] px-4 py-1.5 rounded-full text-sm font-bold mb-6">
+              {t.badge}
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0A2463] mb-6 text-balance">
+              {t.titleStart} <span className="text-[#ED3D4E]">{t.titleHighlight}</span>
+            </h2>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-14">
           {steps.map((step, index) => (
-            <div key={index} className="reveal-item relative">
+            <div key={index} className="relative">
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-12 left-1/2 w-full h-px bg-gradient-to-r from-gray-200 to-transparent pointer-events-none" />
               )}
@@ -113,7 +121,7 @@ export default function HowItWorksSection() {
           ))}
         </div>
 
-        <div className="reveal-item bg-white rounded-3xl p-8 md:p-10 shadow-lg">
+        <div className="bg-white rounded-3xl p-8 md:p-10 shadow-lg">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-center gap-5">
               <div className="w-16 h-16 rounded-2xl bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
