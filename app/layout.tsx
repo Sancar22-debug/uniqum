@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   generator: "v0.app",
   keywords: ["спорт для детей", "гимнастика бишкек", "единоборства для детей", "ЛФК", "детские секции"],
   icons: {
-    icon: "/images/logo_circular.jpg",
-    apple: "/images/logo_circular.jpg",
+    icon: "/images/631454923_18042394823736392_8950591375023917446_n.jpg",
+    apple: "/images/631454923_18042394823736392_8950591375023917446_n.jpg",
   },
 }
 

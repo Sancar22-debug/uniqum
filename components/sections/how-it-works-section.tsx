@@ -121,6 +121,22 @@ export default function HowItWorksSection() {
           ))}
         </div>
 
+        {/* Live Sport Center Photos */}
+        <div className="mb-14 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          <div className="relative h-60 md:h-72 rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+            <Image src="/images/Sport center/IMG_9526 4 (1).jpg" alt="Тренировка" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 65%' }} unoptimized />
+          </div>
+          <div className="relative h-60 md:h-72 rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+            <Image src="/images/Sport center/SEM02086.JPG" alt="Зал" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 80%' }} unoptimized />
+          </div>
+          <div className="relative h-60 md:h-72 rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+            <Image src="/images/Sport center/SEM02254.JPG" alt="Спортсмены" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 65%' }} unoptimized />
+          </div>
+          <div className="relative h-60 md:h-72 rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+            <Image src="/images/Sport center/SEM02627.JPG" alt="Дети" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 65%' }} unoptimized />
+          </div>
+        </div>
+
         <div className="bg-white rounded-3xl p-8 md:p-10 shadow-lg">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-center gap-5">

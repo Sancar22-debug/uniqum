@@ -195,6 +195,29 @@ export default function ContactSection() {
                 <MessageCircle className="w-5 h-5" />
               </a>
             </div>
+
+            {/* 2GIS Map */}
+            <div className="rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl">
+              <iframe
+                src="https://widgets.2gis.com/widget?type=firmsonmap&options=%7B%22pos%22%3A%7B%22lat%22%3A42.858459%2C%22lon%22%3A74.589153%2C%22zoom%22%3A16%7D%2C%22opt%22%3A%7B%22city%22%3A%22bishkek%22%7D%2C%22org%22%3A%2270000001063119278%22%7D"
+                width="100%"
+                height="300"
+                frameBorder="0"
+                style={{ border: 0 }}
+                allowFullScreen
+                title="Uniqum Sport на карте 2ГИС"
+              />
+            </div>
+            <a
+              href="https://2gis.kg/bishkek/firm/70000001063119278/tab/routes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 bg-[#ED3D4E] hover:bg-[#d6354a] text-white font-bold rounded-xl py-3 px-6 transition-colors shadow-lg text-sm"
+            >
+              <MapPin className="w-4 h-4" />
+              {lang === "ru" ? "Построить маршрут в 2ГИС" : "2ГИС'те маршрут түзүү"}
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </div>

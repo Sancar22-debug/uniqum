@@ -76,9 +76,9 @@ export default function ProblemsSection() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="relative flex items-center justify-center mb-16 md:mb-20 min-h-[250px]">
           <div className="absolute left-0 lg:left-4 top-1/2 -translate-y-1/2 w-48 h-48 md:w-80 md:h-80 lg:w-[28rem] lg:h-[28rem] z-0 pointer-events-none hidden sm:block">
-             <Image src="/images/Cartoonypics/confident.png" alt="Confident Boy" fill sizes="448px" className="object-contain relative z-10" />
-             <Image src="/images/icons/lightingred.png" alt="lightning" width={60} height={60} className="absolute -top-6 right-10 rotate-[15deg] z-0 pointer-events-none" unoptimized />
-             <Image src="/images/icons/redstar.png" alt="stars" width={50} height={50} className="absolute bottom-4 -left-2 -rotate-12 z-0 pointer-events-none" unoptimized />
+            <Image src="/images/Cartoonypics/confident.png" alt="Confident Boy" fill sizes="448px" className="object-contain relative z-10" />
+            <Image src="/images/icons/lightingred.png" alt="lightning" width={60} height={60} className="absolute -top-6 right-10 rotate-[15deg] z-0 pointer-events-none" unoptimized />
+            <Image src="/images/icons/redstar.png" alt="stars" width={50} height={50} className="absolute bottom-4 -left-2 -rotate-12 z-0 pointer-events-none" unoptimized />
           </div>
           <div className="text-center relative z-10 max-w-3xl lg:max-w-4xl mx-auto px-4">
             <span className="inline-block bg-[#ED3D4E]/10 text-[#ED3D4E] px-4 py-1.5 rounded-full text-sm font-bold mb-5 shadow-sm">
@@ -97,22 +97,37 @@ export default function ProblemsSection() {
           {problems.map((problem, index) => (
             <div
               key={index}
-              className={`group relative rounded-3xl p-6 border-4 border-white bg-gradient-to-br ${
-                cardThemes[index % cardThemes.length]
-              } shadow-[0_10px_0_0_rgba(10,36,99,0.15)] hover:-translate-y-1 hover:shadow-[0_14px_0_0_rgba(10,36,99,0.2)] transition-all cursor-default`}
+              className={`group relative rounded-3xl p-6 border-4 border-white bg-gradient-to-br ${cardThemes[index % cardThemes.length]
+                } shadow-[0_10px_0_0_rgba(10,36,99,0.15)] hover:-translate-y-1 hover:shadow-[0_14px_0_0_rgba(10,36,99,0.2)] transition-all cursor-default`}
             >
               <div className="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-white/80 border-2 border-white pointer-events-none" />
-              
+
               <div className="absolute -right-4 -bottom-4 w-32 h-32 md:w-40 md:h-40 pointer-events-none transition-transform group-hover:scale-105 z-0">
                 <Image src={problem.image} alt={problem.title[lang]} fill sizes="(max-width: 768px) 150px, 200px" className="object-contain drop-shadow-xl" />
               </div>
-              
+
               <div className="relative z-10 pr-20 md:pr-24">
                 <h3 className="text-xl font-bold text-[#0A2463] mb-2">{problem.title[lang]}</h3>
                 <p className="text-gray-600 leading-relaxed text-sm md:text-base">{problem.description[lang]}</p>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Live Sport Center Photos */}
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          <div className="relative h-60 md:h-72 rounded-2xl overflow-hidden shadow-lg">
+            <Image src="/images/Sport center/SEM01988.JPG" alt="Тренировка" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 65%' }} unoptimized />
+          </div>
+          <div className="relative h-60 md:h-72 rounded-2xl overflow-hidden shadow-lg">
+            <Image src="/images/Sport center/SEM02106.JPG" alt="Занятия" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 90%' }} unoptimized />
+          </div>
+          <div className="relative h-60 md:h-72 rounded-2xl overflow-hidden shadow-lg">
+            <Image src="/images/Sport center/SEM02148.JPG" alt="Спорт" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 95%' }} unoptimized />
+          </div>
+          <div className="relative h-60 md:h-72 rounded-2xl overflow-hidden shadow-lg">
+            <Image src="/images/Sport center/SEM03810.JPG" alt="Дети" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 65%' }} unoptimized />
+          </div>
         </div>
       </div>
     </section>

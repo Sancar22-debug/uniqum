@@ -84,9 +84,9 @@ export default function CommunitySection() {
             </p>
           </div>
           <div className="absolute right-0 lg:right-4 top-1/2 -translate-y-1/2 w-48 h-48 md:w-80 md:h-80 lg:w-[28rem] lg:h-[28rem] z-0 pointer-events-none hidden sm:block">
-             <Image src="/images/Cartoonypics/taekwando.png" alt="Taekwondo Girl" fill sizes="448px" className="object-contain relative z-10" />
-             <Image src="/images/icons/lighting red full.png" alt="lighting" width={64} height={64} className="absolute top-10 -left-6 -rotate-12 z-0 pointer-events-none" unoptimized />
-             <Image src="/images/icons/redstar.png" alt="stars" width={48} height={48} className="absolute bottom-4 -right-2 rotate-[20deg] z-0 pointer-events-none" unoptimized />
+            <Image src="/images/Cartoonypics/taekwando.png" alt="Taekwondo Girl" fill sizes="448px" className="object-contain relative z-10" />
+            <Image src="/images/icons/lighting red full.png" alt="lighting" width={64} height={64} className="absolute top-10 -left-6 -rotate-12 z-0 pointer-events-none" unoptimized />
+            <Image src="/images/icons/redstar.png" alt="stars" width={48} height={48} className="absolute bottom-4 -right-2 rotate-[20deg] z-0 pointer-events-none" unoptimized />
           </div>
         </div>
 

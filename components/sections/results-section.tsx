@@ -3,7 +3,7 @@
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useLanguage } from "@/components/language-provider"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, BookOpen, UtensilsCrossed, Moon, PersonStanding, Clock, Brain, Users, Target, Dumbbell } from "lucide-react"
+import { ArrowRight, BookOpen, Clock, Users, Target, Heart } from "lucide-react"
 import Image from "next/image"
 import { openWhatsApp } from "@/lib/contacts"
 
@@ -14,29 +14,9 @@ const results = [
     description: { ru: "Повышается концентрация и усидчивость", ky: "Көңүл буруу жана чыдамкайлык жогорулайт" },
   },
   {
-    icon: UtensilsCrossed, color: "#10B981",
-    title: { ru: "Начинает лучше есть", ky: "Тамактануусу жакшырат" },
-    description: { ru: "Формируется здоровый аппетит и режим питания", ky: "Дени сак табит жана тамак режими калыптанат" },
-  },
-  {
-    icon: Moon, color: "#8B5CF6",
-    title: { ru: "Лучше спит", ky: "Жакшы уктайт" },
-    description: { ru: "Физическая активность снимает напряжение", ky: "Физикалык активдүүлүк чыңалууну азайтат" },
-  },
-  {
-    icon: PersonStanding, color: "#F59E0B",
-    title: { ru: "Правильная осанка", ky: "Түз келбет" },
-    description: { ru: "Ребёнок чувствует своё тело и движения", ky: "Бала денесин жана кыймылын туура сезет" },
-  },
-  {
     icon: Clock, color: "#EC4899",
     title: { ru: "Привыкает к режиму", ky: "Тартипке көнөт" },
     description: { ru: "Формируется дисциплина и регулярность", ky: "Тартип жана туруктуулук калыптанат" },
-  },
-  {
-    icon: Brain, color: "#0EA5E9",
-    title: { ru: "Справляется со стрессом", ky: "Стресске туруктуу болот" },
-    description: { ru: "Спокойнее реагирует на нагрузки", ky: "Жүктөмгө сабырдуу реакция кылат" },
   },
   {
     icon: Users, color: "#F43F5E",
@@ -49,9 +29,9 @@ const results = [
     description: { ru: "Привычка прикладывать усилия ради цели", ky: "Максат үчүн аракет кылуу адаты пайда болот" },
   },
   {
-    icon: Dumbbell, color: "#84CC16",
-    title: { ru: "База для любого спорта", ky: "Ар бир спортко база" },
-    description: { ru: "Координация, сила, выносливость, гибкость", ky: "Координация, күч, чыдамкайлык, ийкемдүүлүк" },
+    icon: Heart, color: "#8B5CF6",
+    title: { ru: "Нормализуется сон и аппетит", ky: "Уйку жана табит калыпка келет" },
+    description: { ru: "Формируется правильная осанка", ky: "Туура келбет калыптанат" },
   },
 ]
 
@@ -101,9 +81,9 @@ export default function ResultsSection() {
             </p>
           </div>
           <div className="absolute right-0 lg:right-4 top-1/2 -translate-y-1/2 w-48 h-48 md:w-80 md:h-80 lg:w-[28rem] lg:h-[28rem] z-0 pointer-events-none hidden sm:block">
-             <Image src="/images/Cartoonypics/acrobatic.png" alt="Acrobatic Child" fill sizes="448px" className="object-contain relative z-10" />
-             <Image src="/images/icons/redstar.png" alt="stars" width={64} height={64} className="absolute -top-4 -right-2 rotate-12 z-0 pointer-events-none" unoptimized />
-             <Image src="/images/icons/lighting red full.png" alt="lightning" width={56} height={56} className="absolute bottom-8 -left-4 -rotate-12 z-0 pointer-events-none" unoptimized />
+            <Image src="/images/Cartoonypics/acrobatic.png" alt="Acrobatic Child" fill sizes="448px" className="object-contain relative z-10" />
+            <Image src="/images/icons/redstar.png" alt="stars" width={64} height={64} className="absolute -top-4 -right-2 rotate-12 z-0 pointer-events-none" unoptimized />
+            <Image src="/images/icons/lighting red full.png" alt="lightning" width={56} height={56} className="absolute bottom-8 -left-4 -rotate-12 z-0 pointer-events-none" unoptimized />
           </div>
         </div>
 
@@ -125,6 +105,7 @@ export default function ResultsSection() {
             </div>
           ))}
         </div>
+
 
         <div className="text-center mt-10 md:mt-12 px-1">
           <Button

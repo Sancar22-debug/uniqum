@@ -86,11 +86,11 @@ export default function FAQSection() {
     <section id="faq" ref={ref} className="py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <div className="absolute left-0 lg:-left-2 xl:left-8 top-1/2 -translate-y-1/2 w-56 h-[30rem] md:w-80 md:h-[40rem] lg:w-[26rem] lg:h-[50rem] z-0 pointer-events-none hidden md:block opacity-90">
-           <Image src="/images/Cartoonypics/box.png" alt="Boxer Child" fill sizes="(max-width: 1024px) 320px, 416px" className="object-contain" />
+          <Image src="/images/Cartoonypics/box.png" alt="Boxer Child" fill sizes="(max-width: 1024px) 320px, 416px" className="object-contain" />
         </div>
 
         <div className="text-center relative z-10 max-w-3xl mx-auto mb-16">
-          <span className="inline-block bg-[#8B5CF6]/10 text-[#8B5CF6] px-4 py-1.5 rounded-full text-sm font-bold mb-5 shadow-sm">
+          <span className="inline-block bg-gray-100 text-gray-500 px-4 py-1.5 rounded-full text-sm font-bold mb-5 shadow-sm">
             FAQ
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0A2463] mb-6 drop-shadow-sm">{t.title}</h2>

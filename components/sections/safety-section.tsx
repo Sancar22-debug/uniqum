@@ -34,11 +34,7 @@ export default function SafetySection() {
 
   return (
     <section ref={ref} className="relative py-24 overflow-hidden">
-      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #ED3D4E 0%, #c41c2e 100%)" }} />
-      <div
-        className="absolute top-0 right-0 w-[68%] h-full bg-[#0A2463] pointer-events-none"
-        style={{ clipPath: "polygon(18% 0, 100% 0, 100% 100%, 0% 100%)" }}
-      />
+      <div className="absolute inset-0 bg-[#0A2463]" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -83,13 +79,7 @@ export default function SafetySection() {
                 </div>
               </div>
             </div>
-            
-            <div className="absolute top-[20%] -right-4 lg:-right-8 bg-white border border-gray-200 rounded-2xl p-3 lg:p-4 shadow-xl z-20">
-              <Check className="w-6 h-6 lg:w-8 lg:h-8 text-[#0A2463]" />
-            </div>
-            <div className="absolute bottom-[10%] -left-4 lg:-left-8 bg-white rounded-2xl p-3 lg:p-4 shadow-xl z-20">
-              <Shield className="w-6 h-6 lg:w-8 lg:h-8 text-[#ED3D4E]" />
-            </div>
+
           </div>
         </div>
       </div>
