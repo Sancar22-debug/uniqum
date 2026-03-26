@@ -131,7 +131,7 @@ export default function ContactSection() {
                   type="submit"
                   disabled={isSubmitting}
                   size="lg"
-                  className="w-full bg-[#0A2463] text-white hover:bg-[#0A2463]/90 font-black rounded-xl h-14 text-base group shadow-lg"
+                  className="w-full bg-[#ED3D4E] text-white hover:bg-[#ED3D4E]/90 font-black rounded-xl h-14 text-base group shadow-lg"
                 >
                   {isSubmitting ? <Loader2 className="h-5 w-5 animate-spin" /> : t.submit}
                   {!isSubmitting && <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />}

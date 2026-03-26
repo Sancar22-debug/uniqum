@@ -1,46 +1,49 @@
 import { NextResponse } from "next/server"
+import { getAccessToken } from "@/lib/amocrm"
 
-// AmoCRM Complex API Route
 export async function POST(req: Request) {
   try {
     const body = await req.json()
     const { name, phone, age, utmTags } = body
 
     const AMOCRM_SUBDOMAIN = process.env.AMOCRM_SUBDOMAIN
-    const AMOCRM_ACCESS_TOKEN = process.env.AMOCRM_ACCESS_TOKEN
 
-    if (!AMOCRM_SUBDOMAIN || !AMOCRM_ACCESS_TOKEN) {
-      console.warn("AmoCRM credentials are not configured in environment variables.")
-      // We resolve cleanly for local dev testing if not configured yet.
-      return NextResponse.json({ success: true, simulated: true, m: "No credentials" })
+    if (!AMOCRM_SUBDOMAIN) {
+      console.warn("AmoCRM subdomain is not configured.")
+      return NextResponse.json({ success: false, error: "Not configured" }, { status: 500 })
+    }
+
+    const accessToken = await getAccessToken()
+
+    if (!accessToken) {
+      console.error("Failed to get amoCRM access token")
+      return NextResponse.json({ success: false, error: "Auth failed" }, { status: 500 })
     }
 
     const apiUrl = `https://${AMOCRM_SUBDOMAIN}.amocrm.ru/api/v4/leads/complex`
 
-    // Format Custom Fields for UTM tags if present
+    // Format custom fields and UTMs
     const customFields = []
     
-    // NOTE: You will need to replace these ID numbers with your actual custom field IDs from AmoCRM
-    // if you want them properly mapped. For now, we drop them mathematically as a string mapped list.
-    const utmString = Object.entries(utmTags || {})
-        .filter(([_, v]) => v)
-        .map(([k, v]) => `${k}: ${v}`)
-        .join(" | ")
+    // We add the age into custom fields if it exists. 
+    // Usually you need a specific field_id, but here we can just pass it into the lead name or a note if we don't have the ID.
+    const utmString = utmTags 
+      ? Object.entries(utmTags)
+          .filter(([_, v]) => v)
+          .map(([k, v]) => `${k}: ${v}`)
+          .join(" | ")
+      : ""
+
+    const leadName = age ? `Новая заявка с сайта: ${name} (Возраст: ${age})` : `Новая заявка с сайта: ${name}`
 
     const payload = [
       {
-        name: `Новая заявка с сайта: ${name}`,
-        // If you know your Pipeline ID (Воронка) or status ID, you can set them here
+        name: leadName,
+        price: 0,
+        // _embedded: { tags: [{ name: "Заявка с сайта" }] } - Optional tags
         custom_fields_values: [
-          ...(utmString ? [{
-            // Assuming you create a text field for UTM parameters and insert its ID here
-            // field_id: XXXXXX,
-            // values: [{ value: utmString }]
-          }] : []),
-          ...(age ? [{
-             // field_id: YOUR_AGE_FIELD_ID,
-             // values: [{ value: age }]
-          }]: [])
+          // If you create a text field for UTMs in Amo, replace XXXXXX with the ID below
+          // ...(utmString ? [{ field_id: XXXXXX, values: [{ value: utmString }] }] : []),
         ],
         _embedded: {
           contacts: [
@@ -66,7 +69,7 @@ export async function POST(req: Request) {
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${AMOCRM_ACCESS_TOKEN}`,
+        "Authorization": `Bearer ${accessToken}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(payload)
@@ -79,6 +82,25 @@ export async function POST(req: Request) {
     }
 
     const data = await response.json()
+    
+    // We can also post a note with the UTM tags since we don't know the exact custom field IDs
+    if (utmString && data.length > 0 && data[0].id) {
+        const leadId = data[0].id;
+        await fetch(`https://${AMOCRM_SUBDOMAIN}.amocrm.ru/api/v4/leads/${leadId}/notes`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify([{
+                note_type: "common",
+                params: {
+                    text: `UTM Метки:\n${utmString}`
+                }
+            }])
+        })
+    }
+
     return NextResponse.json({ success: true, data })
 
   } catch (error: any) {
