@@ -100,12 +100,12 @@ export default function HeroSection() {
             </p>
 
             <div
-              className="flex flex-col sm:flex-row justify-center gap-3 transition-all duration-700 delay-300"
+              className="flex flex-col sm:flex-row justify-center gap-6 transition-all duration-700 delay-300"
               style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(22px)" }}
             >
               <Button
                 size="lg"
-                className="w-full sm:w-auto bg-white text-[#0A2463] hover:bg-gray-100 font-black rounded-full px-6 sm:px-8 py-4 h-auto text-sm sm:text-base group shadow-xl"
+                className="w-full sm:w-auto bg-[#ED3D4E] text-white hover:bg-[#c41c2e] font-black rounded-full px-6 sm:px-8 py-4 h-auto text-sm sm:text-base group shadow-xl border-2 border-white/90"
                 onClick={openWhatsApp}
               >
                 {t.primaryCta}
@@ -114,7 +114,7 @@ export default function HeroSection() {
               <Button
                 size="lg"
                 variant="outline"
-                className="w-full sm:w-auto border-2 border-white/35 text-white bg-white/10 hover:bg-white/20 rounded-full px-6 sm:px-8 py-4 h-auto text-sm sm:text-base backdrop-blur-sm"
+                className="w-full sm:w-auto border-2 border-white/60 text-white bg-white/10 hover:bg-white/20 rounded-full px-6 sm:px-8 py-4 h-auto text-sm sm:text-base backdrop-blur-sm"
                 onClick={() => {
                   const element = document.getElementById("directions")
                   element?.scrollIntoView({ behavior: "smooth" })

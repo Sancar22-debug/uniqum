@@ -110,7 +110,7 @@ export default function ResultsSection() {
         <div className="text-center mt-10 md:mt-12 px-1">
           <Button
             size="lg"
-            className="w-full sm:w-auto bg-white text-[#0A2463] hover:bg-gray-100 font-black rounded-full px-6 sm:px-8 py-4 sm:py-6 h-auto whitespace-normal text-center leading-tight text-sm sm:text-base group shadow-xl"
+            className="w-full sm:w-auto bg-[#ED3D4E] text-white hover:bg-[#c41c2e] font-black rounded-full px-6 sm:px-8 py-4 sm:py-6 h-auto whitespace-normal text-center leading-tight text-sm sm:text-base group shadow-xl"
             onClick={openWhatsApp}
           >
             {t.cta}

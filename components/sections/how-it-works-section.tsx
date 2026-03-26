@@ -150,7 +150,7 @@ export default function HowItWorksSection() {
             </div>
             <Button
               size="lg"
-              className="bg-[#0A2463] text-white hover:bg-[#0A2463]/90 font-black rounded-full px-8 py-6 text-base group whitespace-nowrap shadow-lg"
+              className="bg-[#ED3D4E] text-white hover:bg-[#ED3D4E]/90 font-black rounded-full px-8 py-6 text-base group whitespace-nowrap shadow-lg"
               onClick={openWhatsApp}
             >
               {t.cta}

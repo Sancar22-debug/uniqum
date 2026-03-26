@@ -182,7 +182,7 @@ export default function CommunitySection() {
 
               <Button
                 size="lg"
-                className="w-full bg-[#0A2463] text-white hover:bg-[#0A2463]/90 font-black rounded-full h-13 md:h-14 text-base group shadow-lg"
+                className="w-full bg-[#ED3D4E] text-white hover:bg-[#ED3D4E]/90 font-black rounded-full h-13 md:h-14 text-base group shadow-lg"
                 onClick={openWhatsApp}
               >
                 {t.cta}

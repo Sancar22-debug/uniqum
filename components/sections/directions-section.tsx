@@ -250,7 +250,7 @@ export default function DirectionsSection() {
         <div className="reveal-item text-center mt-4 px-1">
           <Button
             size="lg"
-            className="w-full sm:w-auto bg-[#0A2463] text-white hover:bg-[#0A2463]/90 font-black rounded-full px-6 sm:px-8 py-4 sm:py-6 h-auto whitespace-normal text-center leading-tight text-sm sm:text-base group shadow-lg"
+            className="w-full sm:w-auto bg-[#ED3D4E] text-white hover:bg-[#ED3D4E]/90 font-black rounded-full px-6 sm:px-8 py-4 sm:py-6 h-auto whitespace-normal text-center leading-tight text-sm sm:text-base group shadow-lg"
             onClick={openWhatsApp}
           >
             {t.cta}
