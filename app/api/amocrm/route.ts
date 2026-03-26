@@ -35,10 +35,6 @@ export async function POST(req: Request) {
         name: leadName,
         price: 0,
         // _embedded: { tags: [{ name: "Заявка с сайта" }] } - Optional tags
-        custom_fields_values: [
-          // If you create a text field for UTMs in Amo, replace XXXXXX with the ID below
-          // ...(utmString ? [{ field_id: XXXXXX, values: [{ value: utmString }] }] : []),
-        ],
         _embedded: {
           contacts: [
             {
