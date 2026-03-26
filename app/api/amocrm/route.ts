@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server"
-import { getAccessToken } from "@/lib/amocrm"
 
 export async function POST(req: Request) {
   try {
@@ -7,17 +6,12 @@ export async function POST(req: Request) {
     const { name, phone, age, utmTags } = body
 
     const AMOCRM_SUBDOMAIN = process.env.AMOCRM_SUBDOMAIN
+    // We now use the long-lived token from Vercel environment variables directly!
+    const accessToken = process.env.AMOCRM_LONG_LIVED_TOKEN
 
-    if (!AMOCRM_SUBDOMAIN) {
-      console.warn("AmoCRM subdomain is not configured.")
+    if (!AMOCRM_SUBDOMAIN || !accessToken) {
+      console.warn("AmoCRM subdomain or long-lived token is not configured.")
       return NextResponse.json({ success: false, error: "Not configured" }, { status: 500 })
-    }
-
-    const accessToken = await getAccessToken()
-
-    if (!accessToken) {
-      console.error("Failed to get amoCRM access token")
-      return NextResponse.json({ success: false, error: "Auth failed" }, { status: 500 })
     }
 
     const apiUrl = `https://${AMOCRM_SUBDOMAIN}.amocrm.ru/api/v4/leads/complex`
