@@ -21,9 +21,7 @@ const footerText = {
     ],
     contactsTitle: "Контакты",
     city: "Проспект Чынгыза Айтматова, 1а/1",
-    rights: "Все права защищены.",
-    privacy: "Политика конфиденциальности",
-    terms: "Пользовательское соглашение",
+    rights: "Все права защищены."
   },
   ky: {
     about:
@@ -141,14 +139,6 @@ export default function Footer() {
           <p className="text-white/35 text-sm">
             © {currentYear} UNIQUM SPORT. {t.rights}
           </p>
-          <div className="flex gap-6 text-sm">
-            <a href="#" className="text-white/35 hover:text-white transition-colors">
-              {t.privacy}
-            </a>
-            <a href="#" className="text-white/35 hover:text-white transition-colors">
-              {t.terms}
-            </a>
-          </div>
         </div>
       </div>
     </footer>
