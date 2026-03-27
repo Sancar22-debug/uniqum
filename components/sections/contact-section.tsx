@@ -90,9 +90,9 @@ export default function ContactSection() {
       <div className="absolute top-16 right-16 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" suppressHydrationWarning />
       <div className="absolute bottom-16 left-16 w-80 h-80 bg-[#ED3D4E]/8 rounded-full blur-3xl pointer-events-none" suppressHydrationWarning />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl">
+      <div className="container mx-auto px-4 relative z-10" suppressHydrationWarning>
+        <div className="grid lg:grid-cols-2 gap-12 items-start" suppressHydrationWarning>
+          <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl" suppressHydrationWarning>
             <span className="inline-block bg-white text-[#0A2463] border border-gray-200 px-4 py-1.5 rounded-full text-sm font-bold mb-5">
               {t.badge}
             </span>
@@ -199,7 +199,7 @@ export default function ContactSection() {
             {/* 2GIS Map */}
             <div className="rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl">
               <iframe
-                src="https://widgets.2gis.com/widget?type=firm&options=%7B%22pos%22%3A%7B%22lat%22%3A42.858459%2C%22lon%22%3A74.589153%2C%22zoom%22%3A16%7D%2C%22opt%22%3A%7B%22city%22%3A%22bishkek%22%7D%2C%22org%22%3A%2270000001063119278%22%7D"
+                src="https://widgets.2gis.com/widget?type=firmsonmap&options=%7B%22pos%22%3A%7B%22lat%22%3A42.86058333997541%2C%22lon%22%3A74.5845937728882%2C%22zoom%22%3A16%7D%2C%22opt%22%3A%7B%22city%22%3A%22bishkek%22%7D%2C%22org%22%3A%2270000001063119278%22%7D"
                 width="100%"
                 height="300"
                 frameBorder="0"

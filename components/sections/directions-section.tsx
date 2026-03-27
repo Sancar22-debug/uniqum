@@ -143,8 +143,8 @@ export default function DirectionsSection() {
         <div className="relative flex items-center justify-center mb-16 md:mb-20 min-h-[250px]">
           <div className="absolute left-0 lg:left-2 top-1/2 -translate-y-1/2 w-40 h-40 md:w-60 md:h-60 lg:w-72 lg:h-72 z-0 pointer-events-none hidden sm:block">
             <Image src="/images/Cartoonypics/judo.png" alt="Judo Kids" fill sizes="288px" className="object-contain opacity-95 relative z-10" />
-            <Image src="/images/icons/lighting red full.png" alt="lightning" width={50} height={50} className="absolute -top-4 left-10 rotate-[-10deg] z-0 pointer-events-none" unoptimized />
-            <Image src="/images/icons/blue lighting full.png" alt="lightning" width={50} height={50} className="absolute bottom-6 -right-6 rotate-[15deg] z-0 pointer-events-none" unoptimized />
+            <Image src="/images/icons/lighting red full.png" alt="lightning" width={50} height={50} className="absolute -top-4 left-10 rotate-[-10deg] z-0 pointer-events-none" style={{ height: "auto" }} unoptimized />
+            <Image src="/images/icons/blue lighting full.png" alt="lightning" width={50} height={50} className="absolute bottom-6 -right-6 rotate-[15deg] z-0 pointer-events-none" style={{ height: "auto" }} unoptimized />
           </div>
           <div className="text-center relative z-10 max-w-3xl lg:max-w-4xl mx-auto px-4">
             <span className="inline-block bg-[#0A2463]/10 text-[#0A2463] px-4 py-1.5 rounded-full text-sm font-bold mb-5 shadow-sm">
