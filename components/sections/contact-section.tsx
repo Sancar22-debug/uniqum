@@ -199,7 +199,7 @@ export default function ContactSection() {
             {/* 2GIS Map */}
             <div className="rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl">
               <iframe
-                src="https://widgets.2gis.com/widget?type=firmsonmap&options=%7B%22pos%22%3A%7B%22lat%22%3A42.858459%2C%22lon%22%3A74.589153%2C%22zoom%22%3A16%7D%2C%22opt%22%3A%7B%22city%22%3A%22bishkek%22%7D%2C%22org%22%3A%2270000001063119278%22%7D"
+                src="https://widgets.2gis.com/widget?type=firm&options=%7B%22pos%22%3A%7B%22lat%22%3A42.858459%2C%22lon%22%3A74.589153%2C%22zoom%22%3A16%7D%2C%22opt%22%3A%7B%22city%22%3A%22bishkek%22%7D%2C%22org%22%3A%2270000001063119278%22%7D"
                 width="100%"
                 height="300"
                 frameBorder="0"
