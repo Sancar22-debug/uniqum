@@ -8,6 +8,7 @@ import DirectionsSection from "@/components/sections/directions-section"
 import HowItWorksSection from "@/components/sections/how-it-works-section"
 import TrainersSection from "@/components/sections/trainers-section"
 import ReviewsSection from "@/components/sections/reviews-section"
+import PricesSection from "@/components/sections/prices-section"
 import SafetySection from "@/components/sections/safety-section"
 import FAQSection from "@/components/sections/faq-section"
 import ContactSection from "@/components/sections/contact-section"
@@ -25,6 +26,7 @@ export default function Home() {
       <HowItWorksSection />
       <TrainersSection />
       <ReviewsSection />
+      <PricesSection />
       <SafetySection />
       <FAQSection />
       <Suspense fallback={<div className="min-h-[600px] w-full" />}>
