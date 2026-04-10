@@ -35,7 +35,8 @@ export async function POST(req: Request) {
     }
 
     // --- MAPPING ---
-    const AGE_FIELD_ID = 687865; // Placeholder
+    // Use the ID discovered from logs here.
+    const CORRECT_AGE_FIELD_ID = null; // Placeholder - change this once ID is found
     
     const utmString = utmTags 
       ? Object.entries(utmTags)
@@ -55,16 +56,9 @@ export async function POST(req: Request) {
 
     const leadName = age ? `Заявка с сайта: ${name} (Ребёнок: ${age} лет)` : `Заявка с сайта: ${name}`
 
-    const payload = [
-      {
+    const lead: any = {
         name: leadName,
         price: 0,
-        custom_fields_values: [
-            {
-                field_id: AGE_FIELD_ID,
-                values: [{ value: age }]
-            }
-        ],
         _embedded: {
           contacts: [
             {
@@ -83,8 +77,19 @@ export async function POST(req: Request) {
             }
           ]
         }
-      }
-    ]
+    };
+
+    // Only add custom field if we have a valid ID
+    if (CORRECT_AGE_FIELD_ID) {
+        lead.custom_fields_values = [
+            {
+                field_id: CORRECT_AGE_FIELD_ID,
+                values: [{ value: age }]
+            }
+        ];
+    }
+
+    const payload = [lead];
 
     const response = await fetch(apiUrl, {
       method: "POST",
