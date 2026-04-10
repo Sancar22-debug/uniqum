@@ -16,25 +16,55 @@ export async function POST(req: Request) {
 
     const apiUrl = `https://${AMOCRM_SUBDOMAIN}.amocrm.ru/api/v4/leads/complex`
 
-    // Format custom fields and UTMs
-    const customFields = []
+    // --- DISCOVERY MODE ---
+    // This logs all custom fields to help find the correct ID for "Возраст ребенка"
+    try {
+      const response = await fetch(`https://${AMOCRM_SUBDOMAIN}.amocrm.ru/api/v4/leads/custom_fields`, {
+          headers: { "Authorization": `Bearer ${accessToken}` }
+      });
+      if (response.ok) {
+          const fieldsData = await response.json();
+          console.log("--- AmoCRM DISCOVERY MODE: Lead Custom Fields ---");
+          fieldsData._embedded?.custom_fields?.forEach((f: any) => {
+              console.log(`Field Name: ${f.name} | ID: ${f.id} | Code: ${f.code}`);
+          });
+          console.log("--------------------------------------------------");
+      }
+    } catch (e) {
+      console.warn("Discovery Mode failed, proceeding with submission.");
+    }
+
+    // --- MAPPING ---
+    const AGE_FIELD_ID = 687865; // Placeholder
     
-    // We add the age into custom fields if it exists. 
-    // Usually you need a specific field_id, but here we can just pass it into the lead name or a note if we don't have the ID.
     const utmString = utmTags 
       ? Object.entries(utmTags)
           .filter(([_, v]) => v)
-          .map(([k, v]) => `${k}: ${v}`)
+          .map(([k, v]) => {
+              const labels: Record<string, string> = {
+                  utm_source: "Источник",
+                  utm_medium: "Тип трафика",
+                  utm_campaign: "Кампания",
+                  utm_term: "Ключевое слово",
+                  utm_content: "Контент"
+              };
+              return `${labels[k] || k}: ${v}`;
+          })
           .join(" | ")
       : ""
 
-    const leadName = age ? `Новая заявка с сайта: ${name} (Возраст: ${age})` : `Новая заявка с сайта: ${name}`
+    const leadName = age ? `Заявка с сайта: ${name} (Ребёнок: ${age} лет)` : `Заявка с сайта: ${name}`
 
     const payload = [
       {
         name: leadName,
         price: 0,
-        // _embedded: { tags: [{ name: "Заявка с сайта" }] } - Optional tags
+        custom_fields_values: [
+            {
+                field_id: AGE_FIELD_ID,
+                values: [{ value: age }]
+            }
+        ],
         _embedded: {
           contacts: [
             {
@@ -73,9 +103,13 @@ export async function POST(req: Request) {
 
     const data = await response.json()
     
-    // We can also post a note with the UTM tags since we don't know the exact custom field IDs
-    if (utmString && data.length > 0 && data[0].id) {
+    // Russian note with UTM and Age info
+    if (data.length > 0 && data[0].id) {
         const leadId = data[0].id;
+        let noteText = `ИНФОРМАЦИЯ О ЗАЯВКЕ:\n`;
+        if (age) noteText += `Возраст ребенка: ${age}\n`;
+        if (utmString) noteText += `\nUTM Метки:\n${utmString}`;
+
         await fetch(`https://${AMOCRM_SUBDOMAIN}.amocrm.ru/api/v4/leads/${leadId}/notes`, {
             method: "POST",
             headers: {
@@ -85,7 +119,7 @@ export async function POST(req: Request) {
             body: JSON.stringify([{
                 note_type: "common",
                 params: {
-                    text: `UTM Метки:\n${utmString}`
+                    text: noteText
                 }
             }])
         })

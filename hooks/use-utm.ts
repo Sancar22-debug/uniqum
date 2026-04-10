@@ -55,6 +55,21 @@ export function useUTM() {
     }
 
     setUtmData(currentUtm)
+
+    // Log for verification
+    if (Object.keys(currentUtm).length > 0) {
+      const labels: Record<string, string> = {
+        utm_source: "Источник",
+        utm_medium: "Тип трафика",
+        utm_campaign: "Кампания",
+        utm_term: "Ключевое слово",
+        utm_content: "Контент"
+      }
+      const formatted = Object.entries(currentUtm)
+        .map(([k, v]) => `${labels[k as keyof typeof labels] || k}: ${v}`)
+        .join(", ")
+      console.log(`%c[UTM Tracking] Активные метки: ${formatted}`, "color: #0099FF; font-weight: bold;")
+    }
   }, [searchParams])
 
   return utmData

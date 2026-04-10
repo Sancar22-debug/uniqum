@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useLanguage } from "@/components/language-provider"
 import { openWhatsApp } from "@/lib/contacts"
+import { useUTM } from "@/hooks/use-utm"
 import Image from "next/image"
 
 const navLinks = [
@@ -50,6 +51,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { lang, setLang } = useLanguage()
   const t = uiText[lang]
+  const utmTags = useUTM()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -120,7 +122,7 @@ export default function Header() {
 
           <Button
             className="hidden md:flex bg-white text-[#0A2463] hover:bg-gray-100 border border-[#0A2463]/20 font-bold rounded-full px-5 py-2 text-sm shadow-md"
-            onClick={openWhatsApp}
+            onClick={() => openWhatsApp(utmTags)}
           >
             {t.signUp}
           </Button>
@@ -159,7 +161,7 @@ export default function Header() {
             className="w-full bg-white text-[#0A2463] hover:bg-gray-100 border border-[#0A2463]/20 font-bold rounded-full mt-4"
             onClick={() => {
               setIsMobileMenuOpen(false)
-              openWhatsApp()
+              openWhatsApp(utmTags)
             }}
           >
             {t.signUpFull}

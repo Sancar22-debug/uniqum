@@ -6,7 +6,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ArrowRight, Check, Phone, MapPin, Instagram, MessageCircle, Loader2 } from "lucide-react"
-import { WHATSAPP_DISPLAY_PHONE, WHATSAPP_URL, openWhatsApp } from "@/lib/contacts"
+import { WHATSAPP_DISPLAY_PHONE, WHATSAPP_URL, openWhatsApp, getWhatsAppUrlWithUTM } from "@/lib/contacts"
 import { useUTM } from "@/hooks/use-utm"
 
 const sectionText = {
@@ -150,7 +150,7 @@ export default function ContactSection() {
 
             <div className="space-y-3">
               <a
-                href={WHATSAPP_URL}
+                href={getWhatsAppUrlWithUTM(utmTags)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-colors group"
@@ -186,7 +186,7 @@ export default function ContactSection() {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href={WHATSAPP_URL}
+                href={getWhatsAppUrlWithUTM(utmTags)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"

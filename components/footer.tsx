@@ -3,7 +3,8 @@
 import { Instagram, MessageCircle, Phone, MapPin } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import Image from "next/image"
-import { WHATSAPP_DISPLAY_PHONE, WHATSAPP_URL } from "@/lib/contacts"
+import { WHATSAPP_DISPLAY_PHONE, getWhatsAppUrlWithUTM } from "@/lib/contacts"
+import { useUTM } from "@/hooks/use-utm"
 
 const footerText = {
   ru: {
@@ -48,6 +49,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
   const { lang } = useLanguage()
   const t = footerText[lang]
+  const utmTags = useUTM()
 
   return (
     <footer className="bg-[#060e24] text-white py-16">
@@ -76,7 +78,7 @@ export default function Footer() {
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href={WHATSAPP_URL}
+                href={getWhatsAppUrlWithUTM(utmTags)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
@@ -119,7 +121,7 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-white flex-shrink-0" />
                 <a
-                  href={WHATSAPP_URL}
+                  href={getWhatsAppUrlWithUTM(utmTags)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white/60 hover:text-white transition-colors text-sm"
