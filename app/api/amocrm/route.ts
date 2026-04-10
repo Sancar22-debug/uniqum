@@ -16,27 +16,15 @@ export async function POST(req: Request) {
 
     const apiUrl = `https://${AMOCRM_SUBDOMAIN}.amocrm.ru/api/v4/leads/complex`
 
-    // --- DISCOVERY MODE ---
-    // This logs all custom fields to help find the correct ID for "Возраст ребенка"
-    try {
-      const response = await fetch(`https://${AMOCRM_SUBDOMAIN}.amocrm.ru/api/v4/leads/custom_fields`, {
-          headers: { "Authorization": `Bearer ${accessToken}` }
-      });
-      if (response.ok) {
-          const fieldsData = await response.json();
-          console.log("--- AmoCRM DISCOVERY MODE: Lead Custom Fields ---");
-          fieldsData._embedded?.custom_fields?.forEach((f: any) => {
-              console.log(`Field Name: ${f.name} | ID: ${f.id} | Code: ${f.code}`);
-          });
-          console.log("--------------------------------------------------");
-      }
-    } catch (e) {
-      console.warn("Discovery Mode failed, proceeding with submission.");
-    }
-
-    // --- MAPPING ---
-    // Use the ID discovered from logs here.
-    const CORRECT_AGE_FIELD_ID = null; // Placeholder - change this once ID is found
+    // --- MAPPING (IDs discovered from logs) ---
+    const FIELD_IDS = {
+        AGE: 1181301,
+        UTM_SOURCE: 661843,
+        UTM_MEDIUM: 661839,
+        UTM_CAMPAIGN: 661841,
+        UTM_CONTENT: 661837,
+        UTM_TERM: 661845
+    };
     
     const utmString = utmTags 
       ? Object.entries(utmTags)
@@ -56,9 +44,28 @@ export async function POST(req: Request) {
 
     const leadName = age ? `Заявка с сайта: ${name} (Ребёнок: ${age} лет)` : `Заявка с сайта: ${name}`
 
+    // Construct custom fields for the lead
+    const leadCustomFields = [];
+    
+    if (age) {
+        leadCustomFields.push({
+            field_id: FIELD_IDS.AGE,
+            values: [{ value: age }]
+        });
+    }
+
+    if (utmTags) {
+        if (utmTags.utm_source) leadCustomFields.push({ field_id: FIELD_IDS.UTM_SOURCE, values: [{ value: utmTags.utm_source }] });
+        if (utmTags.utm_medium) leadCustomFields.push({ field_id: FIELD_IDS.UTM_MEDIUM, values: [{ value: utmTags.utm_medium }] });
+        if (utmTags.utm_campaign) leadCustomFields.push({ field_id: FIELD_IDS.UTM_CAMPAIGN, values: [{ value: utmTags.utm_campaign }] });
+        if (utmTags.utm_content) leadCustomFields.push({ field_id: FIELD_IDS.UTM_CONTENT, values: [{ value: utmTags.utm_content }] });
+        if (utmTags.utm_term) leadCustomFields.push({ field_id: FIELD_IDS.UTM_TERM, values: [{ value: utmTags.utm_term }] });
+    }
+
     const lead: any = {
         name: leadName,
         price: 0,
+        custom_fields_values: leadCustomFields,
         _embedded: {
           contacts: [
             {
@@ -79,16 +86,6 @@ export async function POST(req: Request) {
         }
     };
 
-    // Only add custom field if we have a valid ID
-    if (CORRECT_AGE_FIELD_ID) {
-        lead.custom_fields_values = [
-            {
-                field_id: CORRECT_AGE_FIELD_ID,
-                values: [{ value: age }]
-            }
-        ];
-    }
-
     const payload = [lead];
 
     const response = await fetch(apiUrl, {
@@ -108,7 +105,7 @@ export async function POST(req: Request) {
 
     const data = await response.json()
     
-    // Russian note with UTM and Age info
+    // Russian note with UTM and Age info for secondary visibility
     if (data.length > 0 && data[0].id) {
         const leadId = data[0].id;
         let noteText = `ИНФОРМАЦИЯ О ЗАЯВКЕ:\n`;
