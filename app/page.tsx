@@ -17,7 +17,9 @@ import Footer from "@/components/footer"
 export default function Home() {
   return (
     <main className="overflow-hidden">
-      <Header />
+      <Suspense fallback={<div className="h-16 w-full" />}>
+        <Header />
+      </Suspense>
       <HeroSection />
       <CommunitySection />
       <ProblemsSection />
@@ -32,7 +34,9 @@ export default function Home() {
       <Suspense fallback={<div className="min-h-[600px] w-full" />}>
         <ContactSection />
       </Suspense>
-      <Footer />
+      <Suspense fallback={<div className="h-64 w-full bg-[#060e24]" />}>
+        <Footer />
+      </Suspense>
     </main>
   )
 }
