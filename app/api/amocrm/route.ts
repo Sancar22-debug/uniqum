@@ -14,24 +14,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: "Not configured" }, { status: 500 })
     }
 
-    // --- DISCOVERY MODE 2.0 (Pipelines) ---
-    try {
-      const response = await fetch(`https://${AMOCRM_SUBDOMAIN}.amocrm.ru/api/v4/leads/pipelines`, {
-          headers: { "Authorization": `Bearer ${accessToken}` }
-      });
-      if (response.ok) {
-          const data = await response.json();
-          console.log("--- AmoCRM DISCOVERY MODE: Pipelines & Statuses ---");
-          data._embedded?.pipelines?.forEach((p: any) => {
-              console.log(`Pipeline: ${p.name} | ID: ${p.id}`);
-              p._embedded?.statuses?.forEach((s: any) => {
-                  console.log(`  > Status: ${s.name} | ID: ${s.id}`);
-              });
-          });
-          console.log("--------------------------------------------------");
-      }
-    } catch (e) {}
-
     const apiUrl = `https://${AMOCRM_SUBDOMAIN}.amocrm.ru/api/v4/leads/complex`
 
     // --- MAPPING (IDs discovered from logs) ---
@@ -43,6 +25,9 @@ export async function POST(req: Request) {
         UTM_CONTENT: 661837,
         UTM_TERM: 661845
     };
+
+    const PIPELINE_ID = 5491699;
+    const STATUS_ID = 48608338; // "новый лид"
     
     const utmString = utmTags 
       ? Object.entries(utmTags)
@@ -83,6 +68,8 @@ export async function POST(req: Request) {
     const lead: any = {
         name: leadName,
         price: 0,
+        status_id: STATUS_ID,
+        pipeline_id: PIPELINE_ID,
         custom_fields_values: leadCustomFields,
         _embedded: {
           contacts: [
