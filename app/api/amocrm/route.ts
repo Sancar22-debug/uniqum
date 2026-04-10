@@ -14,6 +14,24 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: "Not configured" }, { status: 500 })
     }
 
+    // --- DISCOVERY MODE 2.0 (Pipelines) ---
+    try {
+      const response = await fetch(`https://${AMOCRM_SUBDOMAIN}.amocrm.ru/api/v4/leads/pipelines`, {
+          headers: { "Authorization": `Bearer ${accessToken}` }
+      });
+      if (response.ok) {
+          const data = await response.json();
+          console.log("--- AmoCRM DISCOVERY MODE: Pipelines & Statuses ---");
+          data._embedded?.pipelines?.forEach((p: any) => {
+              console.log(`Pipeline: ${p.name} | ID: ${p.id}`);
+              p._embedded?.statuses?.forEach((s: any) => {
+                  console.log(`  > Status: ${s.name} | ID: ${s.id}`);
+              });
+          });
+          console.log("--------------------------------------------------");
+      }
+    } catch (e) {}
+
     const apiUrl = `https://${AMOCRM_SUBDOMAIN}.amocrm.ru/api/v4/leads/complex`
 
     // --- MAPPING (IDs discovered from logs) ---
