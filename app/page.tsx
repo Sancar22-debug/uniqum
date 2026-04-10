@@ -20,7 +20,9 @@ export default function Home() {
       <Suspense fallback={<div className="h-16 w-full" />}>
         <Header />
       </Suspense>
-      <HeroSection />
+      <Suspense fallback={<div className="h-[600px] w-full" />}>
+        <HeroSection />
+      </Suspense>
       <CommunitySection />
       <ProblemsSection />
       <ResultsSection />
@@ -28,7 +30,9 @@ export default function Home() {
       <HowItWorksSection />
       <TrainersSection />
       <ReviewsSection />
-      <PricesSection />
+      <Suspense fallback={<div className="h-[400px] w-full" />}>
+        <PricesSection />
+      </Suspense>
       <SafetySection />
       <FAQSection />
       <Suspense fallback={<div className="min-h-[600px] w-full" />}>
