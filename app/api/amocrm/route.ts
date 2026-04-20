@@ -23,7 +23,8 @@ export async function POST(req: Request) {
         UTM_MEDIUM: 661839,
         UTM_CAMPAIGN: 661841,
         UTM_CONTENT: 661837,
-        UTM_TERM: 661845
+        UTM_TERM: 661845,
+        LEAD_SOURCE: 662661 // "Откуда узнали про нас"
     };
 
     const PIPELINE_ID = 5491699;
@@ -48,7 +49,12 @@ export async function POST(req: Request) {
     const leadName = age ? `Заявка с сайта: ${name} (Ребёнок: ${age} лет)` : `Заявка с сайта: ${name}`
 
     // Construct custom fields for the lead
-    const leadCustomFields = [];
+    const leadCustomFields = [
+        {
+            field_id: FIELD_IDS.LEAD_SOURCE,
+            values: [{ value: "Сайт" }]
+        }
+    ];
     
     if (age) {
         leadCustomFields.push({
@@ -69,7 +75,7 @@ export async function POST(req: Request) {
         if (utmTags.utm_content) leadCustomFields.push({ field_id: FIELD_IDS.UTM_CONTENT, values: [{ value: utmTags.utm_content }] });
         if (utmTags.utm_term) leadCustomFields.push({ field_id: FIELD_IDS.UTM_TERM, values: [{ value: utmTags.utm_term }] });
     } else {
-        // No UTM tags at all, definitely set source to 'Сайт'
+        // No UTM tags at all, definitely set UTM source to 'Сайт' for internal tracking
         leadCustomFields.push({ field_id: FIELD_IDS.UTM_SOURCE, values: [{ value: "Сайт" }] });
     }
 
