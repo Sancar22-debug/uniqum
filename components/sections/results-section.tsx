@@ -5,7 +5,7 @@ import { useLanguage } from "@/components/language-provider"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, BookOpen, Clock, Users, Target, Heart } from "lucide-react"
 import Image from "next/image"
-import { openWhatsApp } from "@/lib/contacts"
+
 
 const results = [
   {
@@ -56,6 +56,12 @@ export default function ResultsSection() {
   const ref = useScrollReveal()
   const { lang } = useLanguage()
   const t = sectionText[lang]
+
+  function scrollToContact() {
+    const el = document.getElementById("contact")
+    el?.scrollIntoView({ behavior: "smooth" })
+    window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
+  }
 
   return (
     <section id="results" ref={ref} className="relative py-20 md:py-24 overflow-x-clip">
@@ -111,7 +117,7 @@ export default function ResultsSection() {
           <Button
             size="lg"
             className="w-full sm:w-auto bg-[#ED3D4E] text-white hover:bg-[#c41c2e] font-black rounded-full px-6 sm:px-8 py-4 sm:py-6 h-auto whitespace-normal text-center leading-tight text-sm sm:text-base group shadow-xl"
-            onClick={openWhatsApp}
+            onClick={scrollToContact}
           >
             {t.cta}
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />

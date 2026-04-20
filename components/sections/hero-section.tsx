@@ -5,8 +5,6 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
-import { openWhatsApp } from "@/lib/contacts"
-import { useUTM } from "@/hooks/use-utm"
 
 const heroText = {
   ru: {
@@ -55,7 +53,6 @@ export default function HeroSection() {
   const [visible, setVisible] = useState(false)
   const { lang } = useLanguage()
   const t = heroText[lang]
-  const utmTags = useUTM()
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 100)
@@ -108,7 +105,11 @@ export default function HeroSection() {
               <Button
                 size="lg"
                 className="w-full sm:w-auto bg-[#ED3D4E] text-white hover:bg-[#c41c2e] font-black rounded-full px-6 sm:px-8 py-4 h-auto text-sm sm:text-base group shadow-xl border-2 border-white/90"
-                onClick={() => openWhatsApp(utmTags)}
+                onClick={() => {
+                  const el = document.getElementById("contact")
+                  el?.scrollIntoView({ behavior: "smooth" })
+                  window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
+                }}
               >
                 {t.primaryCta}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />

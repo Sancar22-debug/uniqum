@@ -10,8 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useLanguage } from "@/components/language-provider"
-import { openWhatsApp } from "@/lib/contacts"
-import { useUTM } from "@/hooks/use-utm"
+
 import Image from "next/image"
 
 const navLinks = [
@@ -46,12 +45,17 @@ const uiText = {
   },
 } as const
 
+function scrollToContact() {
+  const el = document.getElementById("contact")
+  el?.scrollIntoView({ behavior: "smooth" })
+  window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
+}
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { lang, setLang } = useLanguage()
   const t = uiText[lang]
-  const utmTags = useUTM()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -122,7 +126,7 @@ export default function Header() {
 
           <Button
             className="hidden md:flex bg-white text-[#0A2463] hover:bg-gray-100 border border-[#0A2463]/20 font-bold rounded-full px-5 py-2 text-sm shadow-md"
-            onClick={() => openWhatsApp(utmTags)}
+            onClick={scrollToContact}
           >
             {t.signUp}
           </Button>
@@ -161,7 +165,7 @@ export default function Header() {
             className="w-full bg-white text-[#0A2463] hover:bg-gray-100 border border-[#0A2463]/20 font-bold rounded-full mt-4"
             onClick={() => {
               setIsMobileMenuOpen(false)
-              openWhatsApp(utmTags)
+              scrollToContact()
             }}
           >
             {t.signUpFull}

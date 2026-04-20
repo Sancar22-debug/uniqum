@@ -5,7 +5,7 @@ import { useLanguage } from "@/components/language-provider"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
-import { openWhatsApp } from "@/lib/contacts"
+
 import Image from "next/image"
 
 const directions = [
@@ -116,6 +116,12 @@ export default function DirectionsSection() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const { lang } = useLanguage()
   const t = sectionText[lang]
+
+  function scrollToContact() {
+    const el = document.getElementById("contact")
+    el?.scrollIntoView({ behavior: "smooth" })
+    window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
+  }
 
   useEffect(() => {
     if (!isAutoPlaying) return
@@ -251,7 +257,7 @@ export default function DirectionsSection() {
           <Button
             size="lg"
             className="w-full sm:w-auto bg-[#ED3D4E] text-white hover:bg-[#ED3D4E]/90 font-black rounded-full px-6 sm:px-8 py-4 sm:py-6 h-auto whitespace-normal text-center leading-tight text-sm sm:text-base group shadow-lg"
-            onClick={openWhatsApp}
+            onClick={scrollToContact}
           >
             {t.cta}
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />

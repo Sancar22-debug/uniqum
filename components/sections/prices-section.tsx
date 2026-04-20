@@ -4,8 +4,7 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useLanguage } from "@/components/language-provider"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Check } from "lucide-react"
-import { openWhatsApp } from "@/lib/contacts"
-import { useUTM } from "@/hooks/use-utm"
+
 
 const sectionText = {
   ru: {
@@ -44,7 +43,12 @@ export default function PricesSection() {
   const ref = useScrollReveal()
   const { lang } = useLanguage()
   const t = sectionText[lang]
-  const utmTags = useUTM()
+
+  function scrollToContact() {
+    const el = document.getElementById("contact")
+    el?.scrollIntoView({ behavior: "smooth" })
+    window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
+  }
 
   return (
     <section id="prices" ref={ref} className="py-24 bg-gray-50 relative overflow-hidden">
@@ -82,7 +86,7 @@ export default function PricesSection() {
             </ul>
             <Button
               className="w-full bg-[#ED3D4E] text-white hover:bg-[#ED3D4E]/90 font-bold rounded-full py-7 text-lg group/btn shadow-lg"
-              onClick={() => openWhatsApp(utmTags)}
+              onClick={scrollToContact}
             >
               {t.cta}
               <ArrowRight className="ml-2 h-6 w-6 group-hover/btn:translate-x-1 transition-transform" />
@@ -109,7 +113,7 @@ export default function PricesSection() {
             </ul>
             <Button
               className="w-full bg-[#ED3D4E] text-white hover:bg-[#ED3D4E]/90 font-bold rounded-full py-7 text-lg group/btn shadow-lg"
-              onClick={openWhatsApp}
+              onClick={scrollToContact}
             >
               {t.cta}
               <ArrowRight className="ml-2 h-6 w-6 group-hover/btn:translate-x-1 transition-transform" />

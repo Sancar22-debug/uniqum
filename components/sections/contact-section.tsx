@@ -2,11 +2,11 @@
 
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useLanguage } from "@/components/language-provider"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ArrowRight, Check, Phone, MapPin, Instagram, MessageCircle, Loader2 } from "lucide-react"
-import { WHATSAPP_DISPLAY_PHONE, WHATSAPP_URL, openWhatsApp, getWhatsAppUrlWithUTM } from "@/lib/contacts"
+import { WHATSAPP_DISPLAY_PHONE, WHATSAPP_PHONE, WHATSAPP_URL, openWhatsApp, getWhatsAppUrlWithUTM } from "@/lib/contacts"
 import { useUTM } from "@/hooks/use-utm"
 
 const sectionText = {
@@ -46,9 +46,20 @@ export default function ContactSection() {
   const ref = useScrollReveal()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isHighlighted, setIsHighlighted] = useState(false)
   const { lang } = useLanguage()
   const t = sectionText[lang]
   const utmTags = useUTM()
+
+  useEffect(() => {
+    const handleHighlight = () => {
+      setIsHighlighted(true)
+      setTimeout(() => setIsHighlighted(false), 2000)
+    }
+
+    window.addEventListener("trigger-contact-highlight", handleHighlight)
+    return () => window.removeEventListener("trigger-contact-highlight", handleHighlight)
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -92,7 +103,12 @@ export default function ContactSection() {
 
       <div className="container mx-auto px-4 relative z-10" suppressHydrationWarning>
         <div className="grid lg:grid-cols-2 gap-12 items-start" suppressHydrationWarning>
-          <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl" suppressHydrationWarning>
+          <div 
+            className={`bg-white rounded-3xl p-8 md:p-10 shadow-2xl transition-all duration-500 ${
+              isHighlighted ? "ring-4 ring-[#ED3D4E] shadow-[0_0_30px_rgba(237,61,78,0.4)] scale-[1.02]" : ""
+            }`} 
+            suppressHydrationWarning
+          >
             <span className="inline-block bg-white text-[#0A2463] border border-gray-200 px-4 py-1.5 rounded-full text-sm font-bold mb-5">
               {t.badge}
             </span>
@@ -150,9 +166,7 @@ export default function ContactSection() {
 
             <div className="space-y-3">
               <a
-                href={getWhatsAppUrlWithUTM(utmTags)}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`tel:${WHATSAPP_PHONE}`}
                 className="flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-colors group"
               >
                 <div className="w-12 h-12 rounded-xl bg-white border border-white/35 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
@@ -190,7 +204,7 @@ export default function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-                aria-label="WhatsApp / Telegram"
+                aria-label="WhatsApp"
               >
                 <MessageCircle className="w-5 h-5" />
               </a>

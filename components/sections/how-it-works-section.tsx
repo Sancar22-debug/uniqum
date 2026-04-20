@@ -4,7 +4,7 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useLanguage } from "@/components/language-provider"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Search, PlayCircle, MessageSquare, TrendingUp, RefreshCw } from "lucide-react"
-import { openWhatsApp } from "@/lib/contacts"
+
 import Image from "next/image"
 
 const steps = [
@@ -73,6 +73,12 @@ export default function HowItWorksSection() {
   const ref = useScrollReveal()
   const { lang } = useLanguage()
   const t = sectionText[lang]
+
+  function scrollToContact() {
+    const el = document.getElementById("contact")
+    el?.scrollIntoView({ behavior: "smooth" })
+    window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
+  }
 
   return (
     <section id="how-it-works" ref={ref} className="py-26 bg-gray-50 relative overflow-x-clip">
@@ -151,7 +157,7 @@ export default function HowItWorksSection() {
             <Button
               size="lg"
               className="bg-[#ED3D4E] text-white hover:bg-[#ED3D4E]/90 font-black rounded-full px-8 py-6 text-base group whitespace-nowrap shadow-lg"
-              onClick={openWhatsApp}
+              onClick={scrollToContact}
             >
               {t.cta}
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />

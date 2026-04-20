@@ -4,7 +4,7 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useLanguage } from "@/components/language-provider"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Trophy, CalendarClock, Users } from "lucide-react"
-import { openWhatsApp } from "@/lib/contacts"
+
 import Image from "next/image"
 
 const text = {
@@ -64,6 +64,12 @@ export default function CommunitySection() {
   const ref = useScrollReveal()
   const { lang } = useLanguage()
   const t = text[lang]
+
+  function scrollToContact() {
+    const el = document.getElementById("contact")
+    el?.scrollIntoView({ behavior: "smooth" })
+    window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
+  }
 
   return (
     <section ref={ref} className="relative py-20 md:py-24 bg-[#F4F7FB] overflow-x-clip">
@@ -183,7 +189,7 @@ export default function CommunitySection() {
               <Button
                 size="lg"
                 className="w-full bg-[#ED3D4E] text-white hover:bg-[#ED3D4E]/90 font-black rounded-full h-13 md:h-14 text-base group shadow-lg"
-                onClick={openWhatsApp}
+                onClick={scrollToContact}
               >
                 {t.cta}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />

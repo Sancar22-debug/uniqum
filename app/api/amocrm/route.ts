@@ -58,11 +58,19 @@ export async function POST(req: Request) {
     }
 
     if (utmTags) {
-        if (utmTags.utm_source) leadCustomFields.push({ field_id: FIELD_IDS.UTM_SOURCE, values: [{ value: utmTags.utm_source }] });
+        if (utmTags.utm_source) {
+            leadCustomFields.push({ field_id: FIELD_IDS.UTM_SOURCE, values: [{ value: utmTags.utm_source }] });
+        } else {
+            // Default to 'Сайт' if no UTM source is provided
+            leadCustomFields.push({ field_id: FIELD_IDS.UTM_SOURCE, values: [{ value: "Сайт" }] });
+        }
         if (utmTags.utm_medium) leadCustomFields.push({ field_id: FIELD_IDS.UTM_MEDIUM, values: [{ value: utmTags.utm_medium }] });
         if (utmTags.utm_campaign) leadCustomFields.push({ field_id: FIELD_IDS.UTM_CAMPAIGN, values: [{ value: utmTags.utm_campaign }] });
         if (utmTags.utm_content) leadCustomFields.push({ field_id: FIELD_IDS.UTM_CONTENT, values: [{ value: utmTags.utm_content }] });
         if (utmTags.utm_term) leadCustomFields.push({ field_id: FIELD_IDS.UTM_TERM, values: [{ value: utmTags.utm_term }] });
+    } else {
+        // No UTM tags at all, definitely set source to 'Сайт'
+        leadCustomFields.push({ field_id: FIELD_IDS.UTM_SOURCE, values: [{ value: "Сайт" }] });
     }
 
     const lead: any = {

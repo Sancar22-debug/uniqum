@@ -1,14 +1,7 @@
 import type { Metadata, Viewport } from "next"
-import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { LanguageProvider } from "@/components/language-provider"
 import "./globals.css"
-
-const inter = Inter({
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  display: "swap",
-})
 
 export const metadata: Metadata = {
   title: "UNIQUM SPORT | Спортивные секции для детей в Бишкеке",
@@ -35,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ky" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`} suppressHydrationWarning>
+      <body className="antialiased" suppressHydrationWarning>
         <LanguageProvider>{children}</LanguageProvider>
         <Analytics />
       </body>
