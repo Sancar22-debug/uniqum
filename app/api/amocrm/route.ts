@@ -86,6 +86,11 @@ export async function POST(req: Request) {
         pipeline_id: PIPELINE_ID,
         custom_fields_values: leadCustomFields,
         _embedded: {
+          tags: [
+            {
+              name: "сайт"
+            }
+          ],
           contacts: [
             {
               first_name: name,
