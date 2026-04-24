@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Trophy, CalendarClock, Users } from "lucide-react"
 
 import Image from "next/image"
+import { openWhatsApp } from "@/lib/contacts"
 
 const text = {
   ru: {
@@ -66,9 +67,7 @@ export default function CommunitySection() {
   const t = text[lang]
 
   function scrollToContact() {
-    const el = document.getElementById("contact")
-    el?.scrollIntoView({ behavior: "smooth" })
-    window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
+    openWhatsApp()
   }
 
   return (

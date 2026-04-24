@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 
 import Image from "next/image"
+import { openWhatsApp } from "@/lib/contacts"
 
 const directions = [
   {
@@ -118,9 +119,7 @@ export default function DirectionsSection() {
   const t = sectionText[lang]
 
   function scrollToContact() {
-    const el = document.getElementById("contact")
-    el?.scrollIntoView({ behavior: "smooth" })
-    window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
+    openWhatsApp()
   }
 
   useEffect(() => {

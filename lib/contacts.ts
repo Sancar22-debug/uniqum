@@ -5,9 +5,19 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_PHONE}`
 export function getWhatsAppUrlWithUTM(utmData?: any) {
   let message = "Здравствуйте! Хочу записаться на тренировку."
   
-  if (utmData && Object.keys(utmData).length > 0) {
-    const source = utmData.utm_source || ""
-    const campaign = utmData.utm_campaign || ""
+  let data = utmData;
+  if (!data && typeof window !== "undefined") {
+    try {
+      const cachedUtm = sessionStorage.getItem("utm_data")
+      if (cachedUtm) {
+        data = JSON.parse(cachedUtm)
+      }
+    } catch (e) {}
+  }
+  
+  if (data && Object.keys(data).length > 0) {
+    const source = data.utm_source || ""
+    const campaign = data.utm_campaign || ""
     if (source || campaign) {
       message += ` (Источник: ${source}${campaign ? ", Кампания: " + campaign : ""})`
     }

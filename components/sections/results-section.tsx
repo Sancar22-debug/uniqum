@@ -5,6 +5,7 @@ import { useLanguage } from "@/components/language-provider"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, BookOpen, Clock, Users, Target, Heart } from "lucide-react"
 import Image from "next/image"
+import { openWhatsApp } from "@/lib/contacts"
 
 
 const results = [
@@ -58,9 +59,7 @@ export default function ResultsSection() {
   const t = sectionText[lang]
 
   function scrollToContact() {
-    const el = document.getElementById("contact")
-    el?.scrollIntoView({ behavior: "smooth" })
-    window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
+    openWhatsApp()
   }
 
   return (

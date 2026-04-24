@@ -4,6 +4,7 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useLanguage } from "@/components/language-provider"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Check } from "lucide-react"
+import { openWhatsApp } from "@/lib/contacts"
 
 
 const sectionText = {
@@ -45,9 +46,7 @@ export default function PricesSection() {
   const t = sectionText[lang]
 
   function scrollToContact() {
-    const el = document.getElementById("contact")
-    el?.scrollIntoView({ behavior: "smooth" })
-    window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
+    openWhatsApp()
   }
 
   return (
