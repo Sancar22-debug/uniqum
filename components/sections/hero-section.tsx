@@ -5,7 +5,6 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
-import { openWhatsApp } from "@/lib/contacts"
 
 const heroText = {
   ru: {
@@ -107,7 +106,9 @@ export default function HeroSection() {
                 size="lg"
                 className="w-full sm:w-auto bg-[#ED3D4E] text-white hover:bg-[#c41c2e] font-black rounded-full px-6 sm:px-8 py-4 h-auto text-sm sm:text-base group shadow-xl border-2 border-white/90"
                 onClick={() => {
-                  openWhatsApp()
+                  const el = document.getElementById("contact")
+                  el?.scrollIntoView({ behavior: "smooth" })
+                  window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
                 }}
               >
                 {t.primaryCta}

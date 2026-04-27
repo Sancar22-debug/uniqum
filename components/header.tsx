@@ -45,10 +45,10 @@ const uiText = {
   },
 } as const
 
-import { openWhatsApp } from "@/lib/contacts"
-
 function scrollToContact() {
-  openWhatsApp()
+  const el = document.getElementById("contact")
+  el?.scrollIntoView({ behavior: "smooth" })
+  window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
 }
 
 export default function Header() {
