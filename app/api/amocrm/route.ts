@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     };
 
     const PIPELINE_ID = 5491699;
-    const STATUS_ID = 48608338; // "новый лид"
+    const STATUS_ID = 85586902; // "Заявки с сайта (приоритет 1)"
     
     const utmString = utmTags 
       ? Object.entries(utmTags)
