@@ -3,47 +3,13 @@
 import { useLanguage } from "@/components/language-provider"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
-import { useCallback, useEffect, useState } from "react"
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
-import Image from "next/image"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { ChevronLeft, ChevronRight, Volume2, VolumeX } from "lucide-react"
 
-const reviews = [
-  {
-    name: "Чипенко Анна",
-    image: "/images/review/Anna.jpeg",
-    subtitle: {
-      ru: "3 года с Uniqum Sport",
-      ky: "Uniqum Sport менен 3 жыл"
-    },
-    text: {
-      ru: "Хочу выразить огромную Благодарна Уникуму- за то,что он дает моим детям такие положительные эмоции, за тренеров-каждый из которых является для моего ребенка авторитетом и другом,за новых друзей-с которыми мой ребенок общается даже за пределами комплекса,за огромный вклад в здоровье моего ребенка-мы действительно меньше болеем,за атмосферу,которая царит в зале!!!! Спасибо Уникум за то,что ты рядом с нами!!!!",
-      ky: "Уникумга чоң ыраазычылыгымды билдиргим келет - балдарыма ушундай позитивдүү эмоцияларды тартуулаганы үчүн, ар бири менин балама дос жана авторитет болгон машыктыруучулар үчүн, комплекстин сыртында да баарлашкан жаңы достору үчүн, баламдын ден соолугуна кошкон зор салымы үчүн - биз чындап эле аз ооруп калдык, залдагы сонун атмосфера үчүн!!!! Биз менен болгонуң үчүн рахмат Уникум!!!!"
-    }
-  },
-  {
-    name: "Анара",
-    image: "/images/review/Anara.jpeg",
-    subtitle: {
-      ru: "родитель Уникумов",
-      ky: "Уникумдардын ата-энеси"
-    },
-    text: {
-      ru: "Уникум Спорт — смело могу сказать, что это ключ к большим возможностям для будущего моих детей. Наряду со здоровьем, здесь учат добиваться успеха и достигать поставленных целей.",
-      ky: "Уникум Спорт — балдарымдын келечеги үчүн эң чоң мүмкүнчүлүктөрдүн ачкычы десем жаңылышпайм. Ден соолук менен бирге, ийгиликке жетүүнү, максатка жетүүнү үйрөтүп жатат десем болот."
-    }
-  },
-  {
-    name: "Ольга",
-    image: "/images/review/Olga.jpeg",
-    subtitle: {
-      ru: "мама Уникума",
-      ky: "Уникумдун апасы"
-    },
-    text: {
-      ru: "Моя дочь уже три года ходит в спортивный комплекс Уникум. Это действительно место, куда дети идут с радостью. Здесь развивают физическую форму,воспитывают дисциплину, уверенность в себе и командный дух. Отдельное спасибо тренерам — они настоящие профессионалы своего дела! Всегда внимательные, терпеливые и умеют найти подход к каждому ребёнку. Мой ребёнок с удовольствием ходит на тренировки и делится своими успехами. Также хочется отметить отличные условия: чистота, безопасность и современное оборудование создают комфортную атмосферу.",
-      ky: "Кызым үч жылдан бери Уникум спорт комплексине барат. Бул чынында эле балдар кубаныч менен бара турган жер. Бул жерде алар физикалык формасын өнүктүрүп, тартипке, өзүнө ишенүүгө жана командалык рухка тарбиялашат. Машыктыруучуларга өзгөчө рахмат – алар өз ишинин чыныгы адистери! Ар дайым кунт коюп, сабырдуу жана ар бир балага мамиле таба билишет. Балам машыгууларга ырахаттануу менен барып, ийгиликтери менен бөлүшөт. Ошондой эле эң сонун шарттарды белгилей кетким келет: тазалык, коопсуздук жана заманбап жабдуулар ыңгайлуу атмосфераны түзөт."
-    }
-  }
+const videos = [
+  { src: "/videos/video1.mp4" },
+  { src: "/videos/video2.mp4" },
+  { src: "/videos/video3.mp4" },
 ]
 
 export default function ReviewsSection() {
@@ -54,14 +20,28 @@ export default function ReviewsSection() {
   )
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
+  const [mutedMap, setMutedMap] = useState<Record<number, boolean>>({})
 
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi])
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi])
+
+  const pauseAllExcept = useCallback((keepIndex: number) => {
+    videoRefs.current.forEach((v, i) => {
+      if (v && i !== keepIndex) {
+        v.pause()
+      }
+    })
+  }, [])
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return
     setPrevBtnEnabled(emblaApi.canScrollPrev())
     setNextBtnEnabled(emblaApi.canScrollNext())
+    const selected = emblaApi.selectedScrollSnap()
+    videoRefs.current.forEach((v, i) => {
+      if (v && i !== selected) v.pause()
+    })
   }, [emblaApi])
 
   useEffect(() => {
@@ -71,13 +51,24 @@ export default function ReviewsSection() {
     emblaApi.on("reInit", onSelect)
   }, [emblaApi, onSelect])
 
+  const handlePlay = (index: number) => {
+    pauseAllExcept(index)
+  }
+
+  const toggleMute = (index: number) => {
+    const video = videoRefs.current[index]
+    if (!video) return
+    video.muted = !video.muted
+    setMutedMap((prev) => ({ ...prev, [index]: video.muted }))
+  }
+
   return (
     <section className="py-20 md:py-24 bg-gray-50 relative overflow-hidden">
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#ED3D4E]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="container mx-auto px-4 z-10 relative">
         <div className="text-center max-w-4xl mx-auto mb-14">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-[#0A2463] mb-5 text-balance">
-            {lang === 'ru' ? 'Отзывы наших клиентов' : 'Биздин кардарлардын сын-пикирлери'}
+            {lang === 'ru' ? 'Видеоотзывы наших клиентов' : 'Биздин кардарлардын видео сын-пикирлери'}
           </h2>
           <p className="text-gray-500 text-lg">
             {lang === 'ru' ? 'Что говорят родители о наших тренировках' : 'Биздин машыгуулар жөнүндө ата-энелер эмне дешет'}
@@ -87,31 +78,35 @@ export default function ReviewsSection() {
         <div className="relative max-w-6xl mx-auto">
           <div className="overflow-hidden p-4 -m-4" ref={emblaRef}>
             <div className="flex -ml-4">
-              {reviews.map((review, index) => (
+              {videos.map((video, index) => (
                 <div className="flex-none pl-4 min-w-[280px] w-full sm:w-[80%] md:w-1/2 lg:w-1/3" key={index}>
-                  <div className="h-full bg-white rounded-3xl p-6 md:p-8 shadow-lg border border-gray-100 flex flex-col relative group hover:-translate-y-1 transition-transform duration-300">
-                    <Quote className="absolute top-6 right-6 w-10 h-10 text-gray-100 rotate-180" />
-
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-gray-100 border-2 border-[#ED3D4E]/20">
-                        <Image
-                          src={review.image}
-                          alt={review.name}
-                          fill
-                          sizes="64px"
-                          className="object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-[#0A2463] leading-tight">{review.name}</h3>
-                        <p className="text-[#ED3D4E] text-sm font-medium mt-1">{review.subtitle[lang]}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex-grow">
-                      <p className="text-gray-600 text-sm md:text-base leading-relaxed italic">
-                        "{review.text[lang]}"
-                      </p>
+                  <div className="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 relative group hover:-translate-y-1 transition-transform duration-300">
+                    <div className="relative w-full aspect-[9/16] bg-gray-100">
+                      <video
+                        ref={(el) => { videoRefs.current[index] = el }}
+                        src={video.src}
+                        className="w-full h-full object-cover"
+                        playsInline
+                        loop
+                        controls
+                        preload="metadata"
+                        onPlay={() => handlePlay(index)}
+                        onVolumeChange={() => {
+                          const v = videoRefs.current[index]
+                          if (v) setMutedMap((prev) => ({ ...prev, [index]: v.muted }))
+                        }}
+                      />
+                      <button
+                        onClick={() => toggleMute(index)}
+                        className="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/60 transition-colors"
+                        aria-label={mutedMap[index] ? "Unmute" : "Mute"}
+                      >
+                        {mutedMap[index] ? (
+                          <VolumeX className="w-4 h-4" />
+                        ) : (
+                          <Volume2 className="w-4 h-4" />
+                        )}
+                      </button>
                     </div>
                   </div>
                 </div>
