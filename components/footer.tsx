@@ -22,7 +22,11 @@ const footerText = {
     ],
     contactsTitle: "Контакты",
     city: "Проспект Чынгыза Айтматова, 1а/1",
-    rights: "Все права защищены."
+    rights: "Все права защищены.",
+    companyName: 'ОсОО «Атлетикс» / LLC "Atletiks"',
+    offer: "Договор оферты",
+    privacy: "Политика конфиденциальности",
+    terms: "Пользовательское соглашение",
   },
   ky: {
     about:
@@ -40,13 +44,14 @@ const footerText = {
     contactsTitle: "Байланыш",
     city: "Чыңгыз Айтматов проспекти, 1а/1",
     rights: "Бардык укуктар корголгон.",
+    companyName: 'ОсОО «Атлетикс» / LLC "Atletiks"',
+    offer: "Оферта келишими",
     privacy: "Купуялык саясаты",
-    terms: "Колдонуучу келишими",
+    terms: "Колдонуучунун келишими",
   },
 } as const
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
   const { lang } = useLanguage()
   const t = footerText[lang]
   const utmTags = useUTM()
@@ -137,10 +142,22 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/35 text-sm">
-            © {currentYear} UNIQUM SPORT. {t.rights}
-          </p>
+        <div className="pt-8 border-t border-white/8 flex flex-col items-center gap-6 text-center">
+          <div className="flex flex-col gap-1 text-white/40 text-sm">
+            <p>{t.companyName}</p>
+            <p>© 2022 UNIQUM SPORT</p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+            <a href="/docs/Договор_оферты_Uniqum_Sport.pdf" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors text-sm">
+              {t.offer}
+            </a>
+            <a href="/docs/Политика_конфиденциальности_Uniqum_Sport.pdf" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors text-sm">
+              {t.privacy}
+            </a>
+            <a href="/docs/Пользовательское_соглашение_Uniqum_Sport.pdf" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors text-sm">
+              {t.terms}
+            </a>
+          </div>
         </div>
       </div>
     </footer>

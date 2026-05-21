@@ -162,7 +162,7 @@ export default function CommunitySection() {
           </div>
 
           <div className="lg:col-span-5">
-            <div className="h-full bg-white rounded-3xl p-7 md:p-8 shadow-2xl border border-[#0A2463]/8">
+            <div className="h-full bg-white rounded-3xl p-7 md:p-8 shadow-2xl border border-[#0A2463]/8 flex flex-col">
               <h3 className="text-2xl md:text-3xl font-black text-[#0A2463] mb-6">
                 {t.cardTitle}
               </h3>
@@ -186,14 +186,16 @@ export default function CommunitySection() {
                 </div>
               </div>
 
-              <Button
-                size="lg"
-                className="w-full bg-[#ED3D4E] text-white hover:bg-[#ED3D4E]/90 font-black rounded-full h-13 md:h-14 text-base group shadow-lg"
-                onClick={scrollToContact}
-              >
-                {t.cta}
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <div className="mt-auto pt-6">
+                <Button
+                  size="lg"
+                  className="w-full bg-[#ED3D4E] text-white hover:bg-[#ED3D4E]/90 font-black rounded-full h-13 md:h-14 text-base group shadow-lg"
+                  onClick={scrollToContact}
+                >
+                  {t.cta}
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>

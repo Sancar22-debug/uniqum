@@ -210,28 +210,33 @@ export default function ContactSection() {
               </a>
             </div>
 
-            {/* 2GIS Map */}
-            <div className="rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl">
-              <iframe
-                src="https://widgets.2gis.com/widget?type=firmsonmap&options=%7B%22pos%22%3A%7B%22lat%22%3A42.86058333997541%2C%22lon%22%3A74.5845937728882%2C%22zoom%22%3A16%7D%2C%22opt%22%3A%7B%22city%22%3A%22bishkek%22%7D%2C%22org%22%3A%2270000001063119278%22%7D"
-                width="100%"
-                height="300"
-                frameBorder="0"
-                style={{ border: 0 }}
-                allowFullScreen
-                title="Uniqum Sport на карте 2ГИС"
-              />
+          </div>
+        </div>
+
+        {/* Full-width Map Section */}
+        <div className="mt-16 w-full relative z-10" suppressHydrationWarning>
+          <div className="rounded-3xl overflow-hidden border border-white/20 shadow-2xl relative bg-white/5">
+            <iframe
+              src="https://widgets.2gis.com/widget?type=firmsonmap&options=%7B%22pos%22%3A%7B%22lat%22%3A42.86058333997541%2C%22lon%22%3A74.5845937728882%2C%22zoom%22%3A16%7D%2C%22opt%22%3A%7B%22city%22%3A%22bishkek%22%7D%2C%22org%22%3A%2270000001063119278%22%7D"
+              width="100%"
+              height="450"
+              frameBorder="0"
+              style={{ border: 0 }}
+              allowFullScreen
+              title="Uniqum Sport на карте 2ГИС"
+            />
+            <div className="absolute bottom-6 right-6 md:bottom-8 md:right-8 flex flex-col gap-3 pointer-events-none">
+              <a
+                href="https://2gis.kg/bishkek/firm/70000001063119278/tab/routes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pointer-events-auto flex items-center justify-center gap-2 bg-[#ED3D4E] hover:bg-[#d6354a] text-white font-bold rounded-xl py-3.5 px-6 transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 text-sm sm:text-base border border-white/10"
+              >
+                <MapPin className="w-5 h-5" />
+                {lang === "ru" ? "Построить маршрут в 2ГИС" : "2ГИС'те маршрут түзүү"}
+                <ArrowRight className="w-5 h-5" />
+              </a>
             </div>
-            <a
-              href="https://2gis.kg/bishkek/firm/70000001063119278/tab/routes"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-[#ED3D4E] hover:bg-[#d6354a] text-white font-bold rounded-xl py-3 px-6 transition-colors shadow-lg text-sm"
-            >
-              <MapPin className="w-4 h-4" />
-              {lang === "ru" ? "Построить маршрут в 2ГИС" : "2ГИС'те маршрут түзүү"}
-              <ArrowRight className="w-4 h-4" />
-            </a>
           </div>
         </div>
       </div>
