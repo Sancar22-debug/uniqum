@@ -104,24 +104,16 @@ export default function HowItWorksSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-14">
           {steps.map((step, index) => (
-            <div key={index} className="relative">
+            <div key={index} className="relative h-full">
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-12 left-1/2 w-full h-px bg-gradient-to-r from-gray-200 to-transparent pointer-events-none" />
               )}
-              <div className="relative bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow">
-                <div
-                  className="absolute -top-4 -left-4 w-11 h-11 rounded-xl flex items-center justify-center text-white text-sm font-black shadow-lg"
-                  style={{ backgroundColor: step.color }}
-                >
-                  {step.number}
+              <div className="relative h-full bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow flex flex-col">
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 shrink-0" style={{ backgroundColor: `${step.color}18` }}>
+                  <step.icon className="w-7 h-7" style={{ color: step.color }} />
                 </div>
-                <div className="pt-3">
-                  <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: `${step.color}18` }}>
-                    <step.icon className="w-7 h-7" style={{ color: step.color }} />
-                  </div>
-                  <h3 className="text-base font-bold text-[#0A2463] mb-2">{step.title[lang]}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{step.description[lang]}</p>
-                </div>
+                <h3 className="text-base font-bold text-[#0A2463] mb-2">{step.title[lang]}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{step.description[lang]}</p>
               </div>
             </div>
           ))}

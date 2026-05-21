@@ -98,16 +98,7 @@ export default function CommunitySection() {
 
         <div className="grid lg:grid-cols-12 gap-8 items-stretch">
           <div className="lg:col-span-7 space-y-5">
-            <div className="relative pt-9 md:pt-12">
-              <Image
-                src="/images/hero-child.jpg"
-                alt="UNIQUM SPORT athlete"
-                width={88}
-                height={88}
-                sizes="88px"
-                className="absolute left-3 md:left-5 -top-3 md:-top-4 z-20 h-16 w-16 md:h-[5.5rem] md:w-[5.5rem] rounded-2xl border-4 border-white object-cover shadow-2xl"
-              />
-
+            <div className="relative">
               <div className="relative h-full min-h-[380px] rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#0A2463] via-[#143d98] to-[#0A2463] p-6 lg:p-10 flex flex-col">
                 <Image
                   src="/images/img_9514.jpg"
@@ -168,20 +159,16 @@ export default function CommunitySection() {
               </h3>
 
               <div className="space-y-3 mb-7">
-                <div className="flex items-center gap-3 bg-[#0A2463]/5 rounded-xl p-3">
-                  <CalendarClock className="w-5 h-5 text-[#0A2463]" />
+                <div className="flex items-center bg-[#0A2463]/5 rounded-xl px-4 py-3 min-h-[72px]">
                   <span className="text-sm font-semibold text-[#0A2463] whitespace-pre-line">{t.schedule1}</span>
                 </div>
-                <div className="flex items-center gap-3 bg-[#ED3D4E]/7 rounded-xl p-3">
-                  <Users className="w-5 h-5 text-[#0A2463]" />
+                <div className="flex items-center bg-[#ED3D4E]/7 rounded-xl px-4 py-3 min-h-[72px]">
                   <span className="text-sm font-semibold text-[#0A2463] whitespace-pre-line">{t.schedule2}</span>
                 </div>
-                <div className="flex items-center gap-3 bg-[#0099FF]/10 rounded-xl p-3">
-                  <Trophy className="w-5 h-5 text-[#0A2463]" />
+                <div className="flex items-center bg-[#0099FF]/10 rounded-xl px-4 py-3 min-h-[72px]">
                   <span className="text-sm font-semibold text-[#0A2463] whitespace-pre-line">{t.schedule3}</span>
                 </div>
-                <div className="flex items-center gap-3 bg-[#22C55E]/10 rounded-xl p-3">
-                  <Trophy className="w-5 h-5 text-[#0A2463]" />
+                <div className="flex items-center bg-[#22C55E]/10 rounded-xl px-4 py-3 min-h-[72px]">
                   <span className="text-sm font-semibold text-[#0A2463] whitespace-pre-line">🏆 {t.cardNote}</span>
                 </div>
               </div>
