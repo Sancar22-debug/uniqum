@@ -79,9 +79,7 @@ export default function Header() {
               alt="UNIQUM SPORT"
               fill
               sizes="(max-width: 768px) 130px, 165px"
-              className={`object-contain object-left ${isScrolled ? "" : "brightness-0 invert"}`}
-              unoptimized
-              priority
+              className={`object-contain object-left ${isScrolled ? "" : "brightness-0 invert"}`} priority
             />
           </a>
         </div>

@@ -67,9 +67,7 @@ export default function Footer() {
                 alt="UNIQUM SPORT"
                 fill
                 sizes="(max-width: 768px) 155px, 195px"
-                className="object-contain object-left brightness-0 invert"
-                unoptimized
-              />
+                className="object-contain object-left brightness-0 invert" />
             </div>
             <p className="text-white/55 mb-6 leading-relaxed text-sm">{t.about}</p>
             <div className="flex gap-3">

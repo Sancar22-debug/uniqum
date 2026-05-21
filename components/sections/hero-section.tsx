@@ -142,9 +142,7 @@ export default function HeroSection() {
                     fill
                     sizes="(max-width: 768px) 50vw, 25vw"
                     className={`object-cover ${index === 1 ? "object-bottom" : "object-center"}`}
-                    style={index === 3 ? { objectPosition: "center 60%" } : undefined}
-                    unoptimized
-                  />
+                    style={index === 3 ? { objectPosition: "center 60%" } : undefined} />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A2463]/40 via-transparent to-transparent" />
                 </div>
               ))}

@@ -89,8 +89,8 @@ export default function HowItWorksSection() {
         <div className="flex flex-col items-center justify-center mb-16 md:mb-20 relative z-20">
           <div className="w-64 h-64 md:w-80 md:h-80 lg:w-[24rem] lg:h-[24rem] relative -mt-32 lg:-mt-44 -mb-8 lg:-mb-12 pointer-events-none hidden sm:block drop-shadow-xl">
             <Image src="/images/Cartoonypics/gymnast.png" alt="Gymnast" fill sizes="384px" className="object-contain relative z-20" />
-            <Image src="/images/icons/blue lighting full.png" alt="lightning" width={56} height={56} className="absolute top-[40%] -right-8 rotate-12 z-10 pointer-events-none" style={{ height: "auto" }} unoptimized />
-            <Image src="/images/icons/redstar.png" alt="stars" width={64} height={64} className="absolute top-[20%] -left-6 -rotate-[15deg] z-10 pointer-events-none" style={{ height: "auto" }} unoptimized />
+            <Image src="/images/icons/blue lighting full.png" alt="lightning" width={56} height={56} className="absolute top-[40%] -right-8 rotate-12 z-10 pointer-events-none" style={{ height: "auto" }} />
+            <Image src="/images/icons/redstar.png" alt="stars" width={64} height={64} className="absolute top-[20%] -left-6 -rotate-[15deg] z-10 pointer-events-none" style={{ height: "auto" }} />
           </div>
           <div className="text-center max-w-3xl lg:max-w-4xl mx-auto px-4 relative z-10">
             <span className="inline-block bg-[#0099FF]/10 text-[#0099FF] px-4 py-1.5 rounded-full text-sm font-bold mb-6">
@@ -130,16 +130,16 @@ export default function HowItWorksSection() {
         {/* Live Sport Center Photos */}
         <div className="mb-14 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           <div className="relative h-60 md:h-72 rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-            <Image src="/images/Sport center/IMG_9526 4 (1).jpg" alt="Тренировка" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 65%' }} unoptimized />
+            <Image src="/images/Sport center/IMG_9526 4 (1).jpg" alt="Тренировка" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 65%' }} />
           </div>
           <div className="relative h-60 md:h-72 rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-            <Image src="/images/Sport center/SEM02086.JPG" alt="Зал" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 80%' }} unoptimized />
+            <Image src="/images/Sport center/SEM02086.JPG" alt="Зал" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 80%' }} />
           </div>
           <div className="relative h-60 md:h-72 rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-            <Image src="/images/Sport center/SEM02254.JPG" alt="Спортсмены" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 65%' }} unoptimized />
+            <Image src="/images/Sport center/SEM02254.JPG" alt="Спортсмены" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 65%' }} />
           </div>
           <div className="relative h-60 md:h-72 rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-            <Image src="/images/Sport center/SEM02627.JPG" alt="Дети" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 65%' }} unoptimized />
+            <Image src="/images/Sport center/SEM02627.JPG" alt="Дети" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" style={{ objectPosition: 'center 65%' }} />
           </div>
         </div>
 
