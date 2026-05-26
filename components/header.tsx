@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useLanguage } from "@/components/language-provider"
+import { useRouter, usePathname } from "next/navigation"
 
 import Image from "next/image"
 
@@ -51,11 +52,16 @@ function scrollToContact() {
   window.dispatchEvent(new CustomEvent("trigger-contact-highlight"))
 }
 
-export default function Header() {
+export default function Header({ isSolid = false }: { isSolid?: boolean }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { lang, setLang } = useLanguage()
   const t = uiText[lang]
+  const router = useRouter()
+  const pathname = usePathname()
+  
+  const isHomePage = pathname === "/"
+  const activeScrolled = isScrolled || isSolid
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,21 +71,29 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const handleSignUpClick = () => {
+    if (isHomePage) {
+      scrollToContact()
+    } else {
+      router.push("/#contact")
+    }
+  }
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
-        isScrolled ? "bg-white/97 backdrop-blur-md shadow-lg py-2" : "bg-transparent py-2"
+        activeScrolled ? "bg-white/97 backdrop-blur-md shadow-lg py-2" : "bg-transparent py-2"
       }`}
     >
       <div suppressHydrationWarning className="container mx-auto px-4 flex h-14 md:h-16 items-center justify-between gap-4">
         <div className="relative w-[130px] md:w-[165px] h-full shrink-0">
-          <a href="#" className="relative block h-full w-full" aria-label={t.homeAria}>
+          <a href="/" className="relative block h-full w-full" aria-label={t.homeAria}>
             <Image
-              src={isScrolled ? "/images/logo-header-cropped.png" : "/images/logo-hero-cropped.png"}
+              src={activeScrolled ? "/images/logo-header-cropped.png" : "/images/logo-hero-cropped.png"}
               alt="UNIQUM SPORT"
               fill
               sizes="(max-width: 768px) 130px, 165px"
-              className={`object-contain object-left ${isScrolled ? "" : "brightness-0 invert"}`} priority
+              className={`object-contain object-left ${activeScrolled ? "" : "brightness-0 invert"}`} priority
             />
           </a>
         </div>
@@ -88,9 +102,9 @@ export default function Header() {
           {navLinks.map((link) => (
             <a
               key={link.href}
-              href={link.href}
+              href={isHomePage ? link.href : `/${link.href}`}
               className={`text-sm font-semibold tracking-wide transition-colors hover:opacity-70 ${
-                isScrolled ? "text-[#0A2463]" : "text-white"
+                activeScrolled ? "text-[#0A2463]" : "text-white"
               }`}
             >
               {link.label[lang]}
@@ -105,7 +119,7 @@ export default function Header() {
                 variant="ghost"
                 size="sm"
                 className={`font-semibold text-sm ${
-                  isScrolled ? "text-[#0A2463] hover:text-[#0A2463]" : "text-white hover:text-white"
+                  activeScrolled ? "text-[#0A2463] hover:text-[#0A2463]" : "text-white hover:text-white"
                 }`}
               >
                 {lang === "ru" ? "RU" : "KY"}
@@ -124,7 +138,7 @@ export default function Header() {
 
           <Button
             className="hidden md:flex bg-white text-[#0A2463] hover:bg-gray-100 border border-[#0A2463]/20 font-bold rounded-full px-5 py-2 text-sm shadow-md"
-            onClick={scrollToContact}
+            onClick={handleSignUpClick}
           >
             {t.signUp}
           </Button>
@@ -135,9 +149,9 @@ export default function Header() {
             aria-label={isMobileMenuOpen ? t.closeMenu : t.openMenu}
           >
             {isMobileMenuOpen ? (
-              <X className={`h-6 w-6 ${isScrolled ? "text-[#0A2463]" : "text-white"}`} />
+              <X className={`h-6 w-6 ${activeScrolled ? "text-[#0A2463]" : "text-white"}`} />
             ) : (
-              <Menu className={`h-6 w-6 ${isScrolled ? "text-[#0A2463]" : "text-white"}`} />
+              <Menu className={`h-6 w-6 ${activeScrolled ? "text-[#0A2463]" : "text-white"}`} />
             )}
           </button>
         </div>
@@ -152,7 +166,7 @@ export default function Header() {
           {navLinks.map((link) => (
             <a
               key={link.href}
-              href={link.href}
+              href={isHomePage ? link.href : `/${link.href}`}
               className="text-[#0A2463] font-semibold py-3 px-3 rounded-lg hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -163,7 +177,7 @@ export default function Header() {
             className="w-full bg-white text-[#0A2463] hover:bg-gray-100 border border-[#0A2463]/20 font-bold rounded-full mt-4"
             onClick={() => {
               setIsMobileMenuOpen(false)
-              scrollToContact()
+              handleSignUpClick()
             }}
           >
             {t.signUpFull}
@@ -173,3 +187,4 @@ export default function Header() {
     </header>
   )
 }
+

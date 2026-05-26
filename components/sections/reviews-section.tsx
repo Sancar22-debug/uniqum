@@ -84,12 +84,12 @@ export default function ReviewsSection() {
                     <div className="relative w-full aspect-[9/16] bg-gray-100">
                       <video
                         ref={(el) => { videoRefs.current[index] = el }}
-                        src={video.src}
+                        src={`${video.src}#t=0.001`}
                         className="w-full h-full object-cover"
                         playsInline
                         loop
                         controls
-                        preload="metadata"
+                        preload="auto"
                         onPlay={() => handlePlay(index)}
                         onVolumeChange={() => {
                           const v = videoRefs.current[index]

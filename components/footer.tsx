@@ -146,15 +146,19 @@ export default function Footer() {
             <p>© 2022 UNIQUM SPORT</p>
           </div>
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
-            <a href="/docs/Договор_оферты_Uniqum_Sport.pdf" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors text-sm">
+            <a href="/offer" className="text-white/40 hover:text-white transition-colors text-sm">
               {t.offer}
             </a>
-            <a href="/docs/Политика_конфиденциальности_Uniqum_Sport.pdf" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors text-sm">
+            <a href="/privacy" className="text-white/40 hover:text-white transition-colors text-sm">
               {t.privacy}
             </a>
-            <a href="/docs/Пользовательское_соглашение_Uniqum_Sport.pdf" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors text-sm">
+            <a href="/terms" className="text-white/40 hover:text-white transition-colors text-sm">
               {t.terms}
             </a>
+          </div>
+          <div className="text-white/40 text-xs max-w-md leading-relaxed">
+            <p>Проспект Чынгыза Айтматова, 1а/1</p>
+            <p>Ленинский район, Бишкек, 720044</p>
           </div>
         </div>
       </div>
