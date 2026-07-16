@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next"
-import { Analytics } from "@vercel/analytics/next"
 import { LanguageProvider } from "@/components/language-provider"
 import "./globals.css"
 
@@ -30,7 +29,6 @@ export default function RootLayout({
     <html lang="ky" suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
         <LanguageProvider>{children}</LanguageProvider>
-        <Analytics />
       </body>
     </html>
   )
