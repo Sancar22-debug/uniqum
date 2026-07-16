@@ -3,17 +3,16 @@
   "name": "uniqum",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-07-16",
+  "keep_vars": true,
   "observability": {
     "enabled": true
   },
   "compatibility_flags": [
-    "nodejs_compat"
+    "nodejs_compat",
+    "global_fetch_strictly_public"
   ],
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
-  },
-  "build": {
-    "command": "npx @opennextjs/cloudflare build"
   }
 }
