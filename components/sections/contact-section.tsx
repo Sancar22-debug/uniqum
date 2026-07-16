@@ -16,6 +16,7 @@ const sectionText = {
     description: "Оставьте контакты — мы свяжемся и подберём идеальную секцию для вашего ребёнка",
     successTitle: "Заявка отправлена!",
     successDescription: "Мы свяжемся с вами в ближайшее время",
+    errorDescription: "Не удалось отправить заявку. Попробуйте ещё раз или свяжитесь с нами по телефону.",
     namePlaceholder: "Ваше имя",
     phonePlaceholder: "Номер телефона",
     agePlaceholder: "Возраст ребёнка",
@@ -31,6 +32,7 @@ const sectionText = {
     description: "Байланышыңызды калтырыңыз — биз байланышып, балаңызга ылайыктуу секцияны тандайбыз",
     successTitle: "Өтүнмө жөнөтүлдү!",
     successDescription: "Жакын арада сиз менен байланышабыз",
+    errorDescription: "Өтүнмө жөнөтүлгөн жок. Кайра аракет кылыңыз же бизге телефон чалыңыз.",
     namePlaceholder: "Атыңыз",
     phonePlaceholder: "Телефон номери",
     agePlaceholder: "Баланын жашы",
@@ -46,6 +48,7 @@ export default function ContactSection() {
   const ref = useScrollReveal()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState("")
   const [isHighlighted, setIsHighlighted] = useState(false)
   const { lang } = useLanguage()
   const t = sectionText[lang]
@@ -66,6 +69,7 @@ export default function ContactSection() {
     if (isSubmitting) return
 
     setIsSubmitting(true)
+    setSubmitError("")
     const formData = new FormData(e.currentTarget)
     
     const payload = {
@@ -76,18 +80,28 @@ export default function ContactSection() {
     }
 
     try {
-      await fetch("/api/amocrm", {
+      const response = await fetch("/api/amocrm", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       })
+
+      const result = (await response.json().catch(() => null)) as
+        | { success?: boolean; error?: string }
+        | null
+
+      if (!response.ok || !result?.success) {
+        throw new Error(result?.error || `Request failed with status ${response.status}`)
+      }
+
+      setIsSubmitted(true)
+      setTimeout(() => setIsSubmitted(false), 5000)
     } catch (error) {
       console.error("Failed to submit to AmoCRM", error)
+      setSubmitError(t.errorDescription)
+    } finally {
+      setIsSubmitting(false)
     }
-
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    setTimeout(() => setIsSubmitted(false), 5000)
   }
 
   return (
@@ -152,6 +166,11 @@ export default function ContactSection() {
                   {isSubmitting ? <Loader2 className="h-5 w-5 animate-spin" /> : t.submit}
                   {!isSubmitting && <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />}
                 </Button>
+                {submitError && (
+                  <p className="text-sm font-medium text-red-600" role="alert">
+                    {submitError}
+                  </p>
+                )}
               </form>
             )}
           </div>

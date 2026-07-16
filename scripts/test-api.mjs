@@ -1,5 +1,5 @@
 async function test() {
-  const url = "https://uniqum.vercel.app/api/amocrm";
+  const url = process.env.AMOCRM_TEST_URL || "https://uniqumsport.kg/api/amocrm";
   const body = {
     name: "Test Name",
     phone: "+996500123456",
