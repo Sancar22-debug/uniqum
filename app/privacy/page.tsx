@@ -4,6 +4,7 @@ import { Suspense } from "react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { useLanguage } from "@/components/language-provider"
+import { CONTACT_PHONES } from "@/lib/contacts"
 import { ChevronRight, FileText, ArrowLeft, Building2, ShieldCheck, Mail, Phone, MapPin } from "lucide-react"
 import Link from "next/link"
 
@@ -217,14 +218,12 @@ export default function PrivacyPolicyPage() {
                 <div>
                   <span className="text-slate-400 text-xs uppercase tracking-wider block mb-1">Телефоны</span>
                   <span className="font-medium text-slate-800 flex flex-col gap-0.5">
-                    <a href="tel:+996505332210" className="hover:underline flex items-center gap-1">
-                      <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                      +996 505 332 210
-                    </a>
-                    <a href="tel:+996997332210" className="hover:underline flex items-center gap-1">
-                      <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                      +996 997 332 210
-                    </a>
+                    {CONTACT_PHONES.map(({ phone, display }) => (
+                      <a key={phone} href={`tel:+${phone}`} className="hover:underline flex items-center gap-1">
+                        <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                        {display}
+                      </a>
+                    ))}
                   </span>
                 </div>
               </div>

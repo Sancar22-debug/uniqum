@@ -1,6 +1,13 @@
 export const WHATSAPP_PHONE = "996997332210"
 export const WHATSAPP_DISPLAY_PHONE = "+996 997 33 22 10"
+export const SECONDARY_PHONE = "996505332210"
+export const SECONDARY_DISPLAY_PHONE = "+996 505 33 22 10"
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_PHONE}`
+
+export const CONTACT_PHONES = [
+  { phone: WHATSAPP_PHONE, display: WHATSAPP_DISPLAY_PHONE },
+  { phone: SECONDARY_PHONE, display: SECONDARY_DISPLAY_PHONE },
+]
 
 export function getWhatsAppUrlWithUTM(utmData?: any) {
   let message = "Здравствуйте! Хочу записаться на тренировку."
